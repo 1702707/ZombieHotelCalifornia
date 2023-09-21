@@ -62,7 +62,7 @@ public class InputController : MonoBehaviour, IDragHandler, IBeginDragHandler, I
         {
             Force = force,
             Direction = direction,
-            ForceDirection =  force * new Vector3(-1, direction.y, direction.x)
+            ForceDirection =  10*force * new Vector3(-1, Mathf.Max(direction.y), direction.x)
         };
         foreach (var listener in _listeners)
         {
