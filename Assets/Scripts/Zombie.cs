@@ -12,11 +12,14 @@ public class Zombie : MonoBehaviour
     public Vector3 playerPos;
     public bool alive = true;
     [SerializeField] private float despawnTimer;
+    public float toppleForce;
+    public bool isDead;
     // Start is called before the first frame update
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
+        isDead = false;
     }
     // Update is called once per frame
     void Update()
@@ -63,6 +66,7 @@ public class Zombie : MonoBehaviour
 
     public IEnumerator ZombieDie()
     {
+        isDead = true;
         if (agent != null)
             Destroy(agent);   
         //agent.enabled = false;
@@ -74,4 +78,18 @@ public class Zombie : MonoBehaviour
 
         Destroy(this.gameObject);
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (isDead)
+        {
+            Zombie hitZombie = collision.gameObject.GetComponent<Zombie>();
+            if (hitZombie != null)
+            {
+                if (collision.impulse.magnitude > hitZombie.toppleForce/2)
+                    if (!hitZombie.isDead)
+                    StartCoroutine(hitZombie.ZombieDie());
+            }
+        }
+    }
+
 }

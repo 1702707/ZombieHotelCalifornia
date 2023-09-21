@@ -152,4 +152,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 1234557981350075983}
-  _ballLifetime: 5
+  _ballLifetime: 15

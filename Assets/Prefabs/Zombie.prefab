@@ -157,6 +157,8 @@ MonoBehaviour:
   playerPos: {x: 14.25, y: 0, z: 0}
   alive: 1
   despawnTimer: 10
+  toppleForce: 15
+  isDead: 0
 --- !u!54 &5768735390109736519
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -33,10 +33,14 @@ public class Spawner : MonoBehaviour
                 StartCoroutine(SpawnRandom(20));
                 Debug.Log("Random Wave");
             }
-            else
+            else if(waveToSpawn >= 0)
             {
                 StartCoroutine(Spawn(waves[waveToSpawn]));
                 Debug.Log("Formation Wave");
+            }
+            else
+            {
+                Debug.Log("No Wave");
             }
         }
     }

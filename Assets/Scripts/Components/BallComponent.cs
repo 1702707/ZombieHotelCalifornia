@@ -50,6 +50,19 @@ namespace Controller.Components
             gameObject.SetActive(false);
             _rigidbody.Sleep();
         }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            Zombie hitZombie = collision.gameObject.GetComponent<Zombie>();
+            if (hitZombie != null)
+            {
+                Debug.Log(collision.impulse.magnitude);
+                if (collision.impulse.magnitude > hitZombie.toppleForce)
+                    if (!hitZombie.isDead)
+                        StartCoroutine(hitZombie.ZombieDie());
+            }
+        }
+
     }
 
     public interface IBallComponent
@@ -61,4 +74,6 @@ namespace Controller.Components
 
         GameObject gameObject { get; }
     }
+
+    
 }
