@@ -1,4 +1,5 @@
 using Controller.Components.VitalitySystem;
+using UnityEngine;
 
 namespace Controller.Player
 {
@@ -11,7 +12,7 @@ namespace Controller.Player
                 var health = enemy?.GetComponent<HealthComponent>();
                 if (health != null)
                 {
-                    var force = (enemy.gameObject.transform.position - this.gameObject.transform.position).normalized;
+                    var force = Vector3.left;
                     health.DoKick(force);
                 }
             }
