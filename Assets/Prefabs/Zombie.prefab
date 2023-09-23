@@ -154,9 +154,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe8b7a9e5fc574409df35c29d4cac4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHealth: 1
+  _iKickable: 1
+  despawnTimer: 10
+  _rigidbody: {fileID: 5768735390109736519}
   playerPos: {x: 14.25, y: 0, z: 0}
   alive: 1
-  despawnTimer: 10
   toppleForce: 15
   isDead: 0
 --- !u!54 &5768735390109736519

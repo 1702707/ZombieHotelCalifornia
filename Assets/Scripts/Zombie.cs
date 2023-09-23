@@ -1,17 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Controller.Components.VitalitySystem;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Zombie : MonoBehaviour
+public class Zombie : HealthComponent
 {
+    [SerializeField] private float despawnTimer;
+    [SerializeField] private Rigidbody _rigidbody;
+    
     private NavMeshAgent agent;
     private Rigidbody rb;
     private bool reachedWaypoint = false;
+    private bool isKicked;
+    
     //Temporary standin for player
     public Vector3 playerPos;
     public bool alive = true;
-    [SerializeField] private float despawnTimer;
+
     public float toppleForce;
     public bool isDead;
     // Start is called before the first frame update
@@ -20,11 +26,12 @@ public class Zombie : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         isDead = false;
+        ResetHealth();
     }
     // Update is called once per frame
     void Update()
     {
-        if (agent != null)
+        if (agent != null && !isDead && !isKicked)
         {
             if (!reachedWaypoint)
             {
@@ -78,6 +85,18 @@ public class Zombie : MonoBehaviour
 
         Destroy(this.gameObject);
     }
+
+    public override void DoDamage(float impulse, int damage)
+    {
+        if(isDead)
+            return;
+        
+        if (impulse > toppleForce)
+        {
+           base.DoDamage(impulse, damage);
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (isDead)
@@ -92,4 +111,28 @@ public class Zombie : MonoBehaviour
         }
     }
 
+    protected override void OnDamage()
+    {
+        if (CurrentHP == 0 && !isDead)
+        {
+            StartCoroutine(ZombieDie());
+        }
+    }
+
+    protected override void OnKick(Vector3 force)
+    {
+        isKicked = true;
+        rb.useGravity = true;
+        rb.isKinematic = false;
+        _rigidbody.AddForce(force, ForceMode.Impulse);
+        StartCoroutine(Delay(0.5f));
+    }
+
+    private IEnumerator Delay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        isKicked = false;
+        rb.useGravity = false;
+        rb.isKinematic = true;
+    }
 }
