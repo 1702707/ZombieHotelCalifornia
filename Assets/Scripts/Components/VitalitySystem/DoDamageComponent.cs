@@ -6,13 +6,15 @@ namespace Controller.Components.VitalitySystem
     public class DoDamageComponent: MonoBehaviour
     {
         [SerializeField] private int _damage;
+        [SerializeField] private EntityType _target;
 
         public int Damage => _damage;
-        
+        public EntityType Target => _target;
+
         private void OnCollisionEnter(Collision collision)
         {
             HealthComponent health = collision.gameObject.GetComponent<HealthComponent>();
-            if (health != null)
+            if (health != null && health.OwnerType == _target)
             {
                 health.DoDamage(collision.impulse.magnitude, _damage);
             }

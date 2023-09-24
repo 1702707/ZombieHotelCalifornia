@@ -35,7 +35,7 @@ public class BowlController : BaseController
         {
             ball.Release();
             _pool.Add(ball);
-            //SetupBall();
+            SetupBall();
         });
         _currentBall = null;
     }

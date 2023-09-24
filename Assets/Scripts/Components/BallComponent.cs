@@ -8,12 +8,14 @@ namespace Controller.Components
     public class BallComponent : MonoBehaviour, IBallComponent
     {
         [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private SphereCollider _collider;
         [SerializeField] private float _ballLifetime;
         
         private List<Action> _listeners = new List<Action>();
 
         public void Push(InputData data)
         {
+            _collider.isTrigger = false;
             _rigidbody.AddForce(data.ForceDirection, ForceMode.Force);
             _rigidbody.useGravity = true;
             StartCoroutine(Lifetime());
@@ -43,6 +45,7 @@ namespace Controller.Components
         {
             this.gameObject.SetActive(true);
             _rigidbody.WakeUp();
+            _collider.isTrigger = true;
         }
 
         public void Release()

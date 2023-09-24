@@ -93,7 +93,7 @@ public class Zombie : HealthComponent
         
         if (impulse > toppleForce)
         {
-           base.DoDamage(impulse, damage);
+           base.DoDamage(damage);
         }
     }
 
@@ -122,7 +122,7 @@ public class Zombie : HealthComponent
     protected override void OnKick(Vector3 force)
     {
         isKicked = true;
-        rb.useGravity = true;
+        // rb.useGravity = true;
         rb.isKinematic = false;
         _rigidbody.AddForce(force, ForceMode.Impulse);
         StartCoroutine(Delay(0.5f));
@@ -132,7 +132,7 @@ public class Zombie : HealthComponent
     {
         yield return new WaitForSeconds(delay);
         isKicked = false;
-        rb.useGravity = false;
+        // rb.useGravity = false;
         rb.isKinematic = true;
     }
 }

@@ -1,7 +1,9 @@
+using System;
+using Controller.Components.VitalitySystem;
 using Controller.Player;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : HealthComponent
 {
     [SerializeField] private DamageTriggerZoneComponent _rightArm;
     [SerializeField] private DamageTriggerZoneComponent _leftArm;
@@ -28,6 +30,27 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButton("RightKick"))
         {
             _rightLeg.DoKick();
+        }
+    }
+
+    protected override void OnDamage()
+    {
+        if (CurrentHP == 0)
+        {
+            Debug.Log("You LOOSE!");
+        }
+    }
+
+    protected override void OnKick(Vector3 force)
+    {
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        var health = other.GetComponent<DoDamageComponent>();
+        if (health != null && health.Target == EntityType.Player)
+        {
+            DoDamage(health.Damage);
         }
     }
 }

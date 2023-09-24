@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Controller.Components.VitalitySystem
 {
@@ -6,11 +8,18 @@ namespace Controller.Components.VitalitySystem
     {
         [SerializeField] private int _maxHealth;
         [SerializeField] private bool _iKickable;
+        [SerializeField] private EntityType _ownerType;
 
         public int CurrentHP => _currentHp;
         public int MaxHP => _maxHealth;
+        public EntityType OwnerType => _ownerType;
 
         private int _currentHp;
+
+        private void Awake()
+        {
+            ResetHealth();
+        }
 
         public void ResetHealth()
         {
