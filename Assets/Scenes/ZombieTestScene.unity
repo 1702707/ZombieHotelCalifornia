@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311924, g: 0.38073963, b: 0.3587269, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1609,6 +1609,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider: {fileID: 187954126}
+  _castTime: 0
+  _delayTime: 0
   _target: 0
 --- !u!1 &194300090
 GameObject:
@@ -4989,8 +4991,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider: {fileID: 711971665}
-  _damage: 1
+  _castTime: 0
+  _delayTime: 0
   _target: 0
+  _kickForce: 3
 --- !u!1 &718113238
 GameObject:
   m_ObjectHideFlags: 0
@@ -6004,8 +6008,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider: {fileID: 846618625}
-  _damage: 1
+  _castTime: 0
+  _delayTime: 0
   _target: 0
+  _kickForce: 3
 --- !u!1 &848937292
 GameObject:
   m_ObjectHideFlags: 0
@@ -9137,7 +9143,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -11320,6 +11326,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider: {fileID: 1609616408}
+  _castTime: 0
+  _delayTime: 0
   _target: 0
 --- !u!1 &1646299315
 GameObject:

@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -13,8 +14,10 @@ namespace Controller.Components.VitalitySystem
         public int CurrentHP => _currentHp;
         public int MaxHP => _maxHealth;
         public EntityType OwnerType => _ownerType;
+        public HealthState State => _status;
 
         private int _currentHp;
+        private HealthState _status;
 
         private void Awake()
         {
@@ -47,8 +50,23 @@ namespace Controller.Components.VitalitySystem
         {
             if (_iKickable)
             {
+                _status = HealthState.Knocked;
                 OnKick(force);
             }
         }
+
+        public virtual void DoPunch()
+        {
+            onPunch();
+        }
+
+        protected abstract void onPunch();
     }
+}
+
+public enum HealthState
+{
+    Knocked,
+    Staggered,
+    Normal
 }

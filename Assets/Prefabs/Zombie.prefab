@@ -352,6 +352,7 @@ MonoBehaviour:
   _ownerType: 0
   despawnTimer: 10
   _rigidbody: {fileID: 5768735390109736519}
+  _animator: {fileID: 4923458978452364813}
   playerPos: {x: 14.25, y: 0, z: 0}
   alive: 1
   toppleForce: 15

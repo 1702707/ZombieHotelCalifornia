@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Controller.Components.VitalitySystem;
 using UnityEngine;
 
 namespace Controller.Player
@@ -7,40 +8,37 @@ namespace Controller.Player
     public class EnemyTriggerComponent: MonoBehaviour
     {
         [SerializeField] private BoxCollider _collider;
-        
-        public List<Collider> Enemies
+        [SerializeField] private float _castTime;
+        [SerializeField] private float _delayTime;
+        [SerializeField] protected EntityType _target;
+
+        protected Dictionary<int, HealthComponent> Enemies
         {
             get
             {
-                _enemies = _enemies.Where(enemy => enemy != null).ToList();
+                foreach (var pair in _enemies.Where(pair => pair.Value == null))
+                {
+                    _enemies.Remove(pair.Key);
+                }
+
                 return _enemies;
             }
         }
 
-        private List<Collider> _enemies = new List<Collider>();
+        private Dictionary<int, HealthComponent> _enemies = new Dictionary<int, HealthComponent>();
 
         private void OnTriggerEnter(Collider other)
         {
-            _enemies.Add(other);
+            var health = other.GetComponent<HealthComponent>();
+            if(health != null && health.OwnerType == _target)
+                _enemies[other.GetHashCode()] = health;
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (_enemies.Contains(other))
-                _enemies.Remove(other);
+            var id = other.GetHashCode();
+            if (_enemies.ContainsKey(id))
+                _enemies.Remove(id);
         }
-        
-        //private List<Collision> _enemies = new List<Collision>();
-
-        // private void OnCollisionEnter(Collision other)
-        // {
-        //     _enemies.Add(other);
-        // }
-        //
-        // private void OnCollisionExit(Collision other)
-        // {
-        //     if (_enemies.Contains(other))
-        //         _enemies.Remove(other);
-        // }
     }
 }

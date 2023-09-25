@@ -4,10 +4,11 @@ using Controller.Components.VitalitySystem;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Zombie : HealthComponent
+public class Zombie : HealthComponent, IMovable
 {
     [SerializeField] private float despawnTimer;
     [SerializeField] private Rigidbody _rigidbody;
+    [SerializeField] private Animator _animator;
     
     private NavMeshAgent agent;
     private Rigidbody rb;
@@ -20,6 +21,9 @@ public class Zombie : HealthComponent
 
     public float toppleForce;
     public bool isDead;
+
+    private bool _isMoving;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -27,11 +31,15 @@ public class Zombie : HealthComponent
         rb = GetComponent<Rigidbody>();
         isDead = false;
         ResetHealth();
+        Move();
     }
     // Update is called once per frame
     void Update()
     {
-        if (agent != null && !isDead && !isKicked)
+        if(!_isMoving)
+            return;
+        
+        if (agent != null && !isDead)
         {
             if (!reachedWaypoint)
             {
@@ -75,6 +83,7 @@ public class Zombie : HealthComponent
     public IEnumerator ZombieDie()
     {
         isDead = true;
+        StopMove();
         if (agent != null)
             Destroy(agent);   
         //agent.enabled = false;
@@ -96,6 +105,10 @@ public class Zombie : HealthComponent
         {
            base.DoDamage(damage);
         }
+    }
+
+    protected override void onPunch()
+    {
     }
 
     /*private void OnCollisionEnter(Collision collision)
@@ -138,4 +151,26 @@ public class Zombie : HealthComponent
         // rb.useGravity = false;
         rb.isKinematic = true;
     }
+
+    public void Move()
+    {
+        _isMoving = true;
+        _animator.enabled = true;
+        if(agent != null)
+            agent.isStopped = false;
+    }
+
+    public void StopMove()
+    {
+        _isMoving = false;
+        _animator.enabled = false;
+        if(agent!=null)
+            agent.isStopped = true;
+    }
+}
+
+public interface IMovable
+{
+    void Move();
+    void StopMove();
 }

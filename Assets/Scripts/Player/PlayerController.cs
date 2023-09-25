@@ -5,29 +5,30 @@ using UnityEngine;
 
 public class PlayerController : HealthComponent
 {
-    [SerializeField] private DamageTriggerZoneComponent _rightArm;
-    [SerializeField] private DamageTriggerZoneComponent _leftArm;
+    [SerializeField] private PunchTriggerZoneComponent _rightArm;
+    [SerializeField] private PunchTriggerZoneComponent _leftArm;
     [SerializeField] private KickTriggerZoneComponent _rightLeg;
     [SerializeField] private KickTriggerZoneComponent _leftLeg;
 
     void Update()
     {
-        if (Input.GetButton("LeftPunch"))
+        if (Input.GetButtonUp("LeftPunch"))
         {
-            _leftArm.DoDamage();
+            _leftArm.DoPunch();
         }
         
-        if (Input.GetButton("RightPunch"))
+        if (Input.GetButtonUp("RightPunch"))
         {
-            _rightArm.DoDamage();
+            Debug.Log("OnPunch");
+            _rightArm.DoPunch();
         }
         
-        if (Input.GetButton("LeftKick"))
+        if (Input.GetButtonUp("LeftKick"))
         {
             _leftLeg.DoKick();
         }
         
-        if (Input.GetButton("RightKick"))
+        if (Input.GetButtonUp("RightKick"))
         {
             _rightLeg.DoKick();
         }
@@ -42,6 +43,10 @@ public class PlayerController : HealthComponent
     }
 
     protected override void OnKick(Vector3 force)
+    {
+    }
+
+    protected override void onPunch()
     {
     }
 

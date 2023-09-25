@@ -5,16 +5,22 @@ namespace Controller.Player
 {
     public class KickTriggerZoneComponent: EnemyTriggerComponent
     {
-        [SerializeField] private EntityType _target;
+        [SerializeField] private int _kickForce;
+        [SerializeField] private int _damage;
         public void DoKick()
         {
             foreach (var enemy in Enemies)
             {
-                var health = enemy?.GetComponent<HealthComponent>();
+                var health = enemy.Value.GetComponent<HealthComponent>();
                 if (health != null && health.OwnerType == _target)
                 {
-                    var force = Vector3.left;
+                    var force = _kickForce * Vector3.left;
                     health.DoKick(force);
+                    var staggered = enemy.Value.GetComponent<StaggeredComponent>();
+                    if (staggered != null && staggered.InProgress)
+                    {
+                        health.DoDamage(_damage);
+                    }
                 }
             }
         }
