@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 3865623332096227343}
   - component: {fileID: 7538535396444037727}
   - component: {fileID: 280934925380538346}
-  - component: {fileID: 4970887982464408087}
+  - component: {fileID: 4923458978452364813}
   m_Layer: 3
   m_Name: Capsule
   m_TagString: Untagged
@@ -254,7 +254,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &4970887982464408087
+--- !u!95 &4923458978452364813
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -264,7 +264,7 @@ Animator:
   m_GameObject: {fileID: 6363469889306027773}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3f0a1d1c0b24f0642a064b9bcb6b045e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 04fb637e7f3462e4b9671ec7eac498a6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
