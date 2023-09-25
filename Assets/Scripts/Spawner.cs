@@ -12,6 +12,7 @@ public class Spawner : MonoBehaviour
 
     [Header("Random Wave Waypoints")]
     [SerializeField] private Zombie prefab;
+    [SerializeField] private Zombie crawler;
     [SerializeField] private float randomGapTime;
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private Transform[] randomFrontLeftSpawnPoints;

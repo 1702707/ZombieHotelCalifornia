@@ -41,6 +41,7 @@ public class Zombie : HealthComponent
                     reachedWaypoint = true;
                     agent.SetDestination(new Vector3(12, transform.position.y, transform.position.z));
                 }
+                transform.LookAt(new Vector3(12, transform.position.y, transform.position.z), Vector3.up);
             }
             else
             {
@@ -97,7 +98,7 @@ public class Zombie : HealthComponent
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         if (isDead)
         {
@@ -106,10 +107,12 @@ public class Zombie : HealthComponent
             {
                 if (collision.impulse.magnitude > hitZombie.toppleForce/2)
                     if (!hitZombie.isDead)
+                    Debug.Log("Collision Enter");
                     StartCoroutine(hitZombie.ZombieDie());
             }
         }
-    }
+    }*/
+
 
     protected override void OnDamage()
     {
