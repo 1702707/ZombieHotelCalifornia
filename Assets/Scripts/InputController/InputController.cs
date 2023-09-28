@@ -11,6 +11,7 @@ public class InputController : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     private float _maxDistance;
     private Vector2 _directionStartPoint;
     private List<Action<InputData>> _listeners = new List<Action<InputData>>();
+    private List<Action> _listenersStart = new List<Action>();
     private Vector2 _directionEndPoint;
     private bool _forceMeasure;
 
@@ -36,7 +37,6 @@ public class InputController : MonoBehaviour, IDragHandler, IBeginDragHandler, I
                 _forceMeasure = false;
             }
         }
-        
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -46,6 +46,10 @@ public class InputController : MonoBehaviour, IDragHandler, IBeginDragHandler, I
         _directionEndPoint = Vector2.negativeInfinity;
         _maxDistance = 0;
         _forceMeasure = true;
+        foreach (var action in _listenersStart)
+        {
+            action.Invoke();
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -56,7 +60,7 @@ public class InputController : MonoBehaviour, IDragHandler, IBeginDragHandler, I
 
     private void FireEvent()
     {
-        var force = _maxDistance;
+        var force = Mathf.Clamp(_maxDistance,1,_maxStrenge);
         var direction = (_directionEndPoint - _directionStartPoint).normalized;
         var data = new InputData()
         {
@@ -78,6 +82,12 @@ public class InputController : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     private void OnDestroy()
     {
         _listeners.Clear();
+        _listenersStart.Clear();
+    }
+
+    public void SubscribeOnStartInput(Action onStartInput)
+    {
+        _listenersStart.Add(onStartInput);
     }
 }
 

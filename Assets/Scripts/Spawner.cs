@@ -60,7 +60,7 @@ public class Spawner : MonoBehaviour
                     if (wave[i].spawnPoint != null)
                     {
                         Zombie temp = Instantiate(wave[i].zombie, wave[i].spawnPoint.position, new Quaternion(0, 0, 0, 0));
-                        temp.transform.LookAt(wave[i].waypoint.position, Vector3.up);
+                        temp.transform.LookAt(wave[i].waypoint.position);
                         temp.SetWaypoint(wave[i].waypoint.position);
                     }
                     wave.RemoveAt(i);

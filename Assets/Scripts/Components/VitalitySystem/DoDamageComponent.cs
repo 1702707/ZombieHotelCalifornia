@@ -13,7 +13,7 @@ namespace Controller.Components.VitalitySystem
 
         private void OnCollisionEnter(Collision collision)
         {
-            Debug.Log(" Enter");
+            Debug.Log($" Enter {collision.gameObject.name}");
             HealthComponent health = collision.gameObject.GetComponent<HealthComponent>();
             if (health != null && health.OwnerType == _target)
             {
@@ -32,5 +32,14 @@ namespace Controller.Components.VitalitySystem
         //                 StartCoroutine(hitZombie.ZombieDie());
         //     }
         // }
+        public void SetTarget(EntityType enemy)
+        {
+            _target = enemy;
+        }
+
+        public void SetDamage(int damage)
+        {
+            _damage = damage;
+        }
     }
 }

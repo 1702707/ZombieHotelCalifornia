@@ -4,9 +4,10 @@ using Controller;
 using Controller.Components;
 using UnityEngine;
 
-public class BowlController : BaseController
+public class PlayerBowlController : BaseController
 {
     [SerializeField] private InputController _inputController;
+    [SerializeField] private Animator _animator;
     [SerializeField] private GameObject _ballPrefab;
     [SerializeField] private Transform _spawnPoint; 
     [SerializeField] private int _prewarmCount;
@@ -20,17 +21,36 @@ public class BowlController : BaseController
         PrewarmPool();
         SetupBall();
         _inputController.SubscribeOnInput(OnInput);
+        _inputController.SubscribeOnStartInput(OnStartInput);
     }
 
-    private void OnInput(InputData data)
+    private void OnStartInput()
+    {
+        ShowBall();
+    }
+
+    public void ShowBall()
     {
         if (_currentBall == null)
         {
             SetupBall();
         }
-        
+        else
+        {
+            _currentBall.Activate();
+        }
+    }
+
+    public void HideBall()
+    {
+        _currentBall?.Release();
+    }
+
+    private void OnInput(InputData data)
+    {
         var ball = _currentBall;
         ball?.Push(data);
+        _animator.SetTrigger("ThrowBall");
         ball?.SubscribeOnLifetimeEnd(() =>
         {
             ball.Release();
@@ -50,6 +70,7 @@ public class BowlController : BaseController
             var go = _pool.FirstOrDefault();
             go.Activate();
             go.gameObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+            _animator.SetTrigger("HoldBall");
             _pool.Remove(go);
             _currentBall = go;
         }

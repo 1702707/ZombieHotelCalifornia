@@ -13,8 +13,7 @@ public class Zombie : HealthComponent, IMovable
     private NavMeshAgent agent;
     private Rigidbody rb;
     private bool reachedWaypoint = false;
-    private bool isKicked;
-    
+
     //Temporary standin for player
     public Vector3 playerPos;
     public bool alive = true;
@@ -36,6 +35,8 @@ public class Zombie : HealthComponent, IMovable
     // Update is called once per frame
     void Update()
     {
+        transform.LookAt(new Vector3(12, transform.position.y, transform.position.z));
+        
         if(!_isMoving)
             return;
         
@@ -49,7 +50,6 @@ public class Zombie : HealthComponent, IMovable
                     reachedWaypoint = true;
                     agent.SetDestination(new Vector3(12, transform.position.y, transform.position.z));
                 }
-                transform.LookAt(new Vector3(12, transform.position.y, transform.position.z), Vector3.up);
             }
             else
             {
@@ -57,13 +57,13 @@ public class Zombie : HealthComponent, IMovable
                 if (transform.position.x >= 12)
                 {
                     agent.SetDestination(playerPos);
-                    transform.LookAt(playerPos, Vector3.up);
+                    //transform.LookAt(playerPos, Vector3.up);
                 }
 
                 else
                 {
                     agent.SetDestination(new Vector3(12, transform.position.y, transform.position.z));
-                    transform.LookAt(new Vector3(12, transform.position.y, transform.position.z), Vector3.up);
+                    //transform.LookAt(new Vector3(12, transform.position.y, transform.position.z), Vector3.up);
                 }
             }
         }
@@ -137,7 +137,6 @@ public class Zombie : HealthComponent, IMovable
 
     protected override void OnKick(Vector3 force)
     {
-        isKicked = true;
         // rb.useGravity = true;
         rb.isKinematic = false;
         _rigidbody.AddForce(force, ForceMode.Impulse);
@@ -147,7 +146,6 @@ public class Zombie : HealthComponent, IMovable
     private IEnumerator Delay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        isKicked = false;
         // rb.useGravity = false;
         rb.isKinematic = true;
     }

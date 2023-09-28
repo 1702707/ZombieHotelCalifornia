@@ -8,25 +8,30 @@ namespace Controller.Player
     public class PunchTriggerZoneComponent: EnemyTriggerComponent
     {
         [SerializeField]
+        private float _delay;
+        [SerializeField]
         private int _kickForce;
+
+        public float Delay => _delay;
+
         public void DoPunch()
         {
             foreach (var pair in Enemies)
             {
-                var staggered = pair.Value.GetComponent<StaggeredComponent>();
-                if (staggered == null)
+                var health = pair.Value;
+                if (health.Staggered.InProgress)
                 {
-                    staggered = pair.Value.gameObject.AddComponent<StaggeredComponent>();
-                }
-
-                if (staggered.InProgress)
-                {
-                    pair.Value.DoKick(_kickForce * Vector3.left);
+                    health.Staggered.SetOnHeatAction((collision)=>
+                    {
+                        var otherHealth = collision.gameObject.GetComponent<HealthComponent>();
+                        otherHealth.DoKick(_kickForce * Vector3.left);
+                        otherHealth.DoPunch();
+                    });
+                    health.DoKick(_kickForce * Vector3.left);
                 }
                 else
                 {
-                    staggered.Do();
-                    pair.Value.DoPunch();
+                    health.DoPunch();
                 }
             }
         }

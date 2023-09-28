@@ -8,15 +8,14 @@ namespace Controller.Player
     public class EnemyTriggerComponent: MonoBehaviour
     {
         [SerializeField] private BoxCollider _collider;
-        [SerializeField] private float _castTime;
-        [SerializeField] private float _delayTime;
         [SerializeField] protected EntityType _target;
 
         protected Dictionary<int, HealthComponent> Enemies
         {
             get
             {
-                foreach (var pair in _enemies.Where(pair => pair.Value == null))
+                var enemy = _enemies.Where(pair => pair.Value == null).ToList();
+                foreach (var pair in enemy)
                 {
                     _enemies.Remove(pair.Key);
                 }

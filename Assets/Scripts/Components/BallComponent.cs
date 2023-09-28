@@ -45,13 +45,14 @@ namespace Controller.Components
         {
             this.gameObject.SetActive(true);
             _rigidbody.WakeUp();
-            _collider.isTrigger = true;
         }
 
         public void Release()
         {
             gameObject.SetActive(false);
             _rigidbody.Sleep();
+            _collider.isTrigger = true;
+            _rigidbody.useGravity = false;
         }
     }
 

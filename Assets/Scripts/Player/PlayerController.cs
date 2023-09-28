@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Controller.Components.VitalitySystem;
 using Controller.Player;
 using UnityEngine;
@@ -9,29 +10,46 @@ public class PlayerController : HealthComponent
     [SerializeField] private PunchTriggerZoneComponent _leftArm;
     [SerializeField] private KickTriggerZoneComponent _rightLeg;
     [SerializeField] private KickTriggerZoneComponent _leftLeg;
+    [SerializeField] private Animator _animator;
+    
+    private float _currentDelay;
+    private double _expDelaySeconds;
 
     void Update()
     {
+        if(DateTime.Now.Second > _expDelaySeconds)
+            
         if (Input.GetButtonUp("LeftPunch"))
         {
-            _leftArm.DoPunch();
+            _expDelaySeconds = DateTime.Now.Second + _leftArm.Delay;
+            _animator.SetTrigger("LeftPunch");
+            StartCoroutine(DoActionWithDelay(_leftArm.Delay, _leftArm.DoPunch));
         }
         
         if (Input.GetButtonUp("RightPunch"))
         {
-            Debug.Log("OnPunch");
-            _rightArm.DoPunch();
+            _expDelaySeconds = DateTime.Now.Second + _rightArm.Delay;
+            _animator.SetTrigger("RightPunch");
+            StartCoroutine(DoActionWithDelay(_rightArm.Delay, _rightArm.DoPunch));
         }
         
         if (Input.GetButtonUp("LeftKick"))
         {
-            _leftLeg.DoKick();
+            _expDelaySeconds = DateTime.Now.Second + _leftLeg.Delay;
+            StartCoroutine(DoActionWithDelay(_leftLeg.Delay, _leftLeg.DoKick));
         }
         
         if (Input.GetButtonUp("RightKick"))
         {
-            _rightLeg.DoKick();
+            _expDelaySeconds = DateTime.Now.Second + _rightLeg.Delay;
+            StartCoroutine(DoActionWithDelay(_rightLeg.Delay, _rightLeg.DoKick));
         }
+    }
+
+    private IEnumerator DoActionWithDelay(float delay, Action doPunch)
+    {
+        yield return new WaitForSeconds(delay);
+        doPunch.Invoke();
     }
 
     protected override void OnDamage()
@@ -50,12 +68,12 @@ public class PlayerController : HealthComponent
     {
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        var health = other.GetComponent<DoDamageComponent>();
-        if (health != null && health.Target == EntityType.Player)
-        {
-            DoDamage(health.Damage);
-        }
-    }
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     var health = other.GetComponent<DoDamageComponent>();
+    //     if (health != null && health.Target == EntityType.Player)
+    //     {
+    //         DoDamage(health.Damage);
+    //     }
+    // }
 }

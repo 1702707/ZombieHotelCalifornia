@@ -18,6 +18,7 @@ namespace Controller.Components.VitalitySystem
 
         private int _currentHp;
         private HealthState _status;
+        private StaggeredComponent _staggered;
 
         private void Awake()
         {
@@ -51,16 +52,47 @@ namespace Controller.Components.VitalitySystem
             if (_iKickable)
             {
                 _status = HealthState.Knocked;
+                if (Staggered.InProgress)
+                {
+                    
+                }
                 OnKick(force);
             }
         }
 
         public virtual void DoPunch()
         {
+            Staggered.Do();
             onPunch();
         }
 
+        public StaggeredComponent Staggered
+        {
+            get
+            {
+                if (_staggered == null)
+                {
+                    _staggered = GetComponent<StaggeredComponent>() ?? gameObject.AddComponent<StaggeredComponent>();
+                }
+
+                return _staggered;
+            }
+        }
+
         protected abstract void onPunch();
+        
+        
+        // private void OnCollisionEnter(Collision collision)
+        // {
+        //     if (Staggered.InProgress)
+        //     {
+        //         var health = collision.gameObject.GetComponent<HealthComponent>();
+        //         if (health != null && health.OwnerType == EntityType.Enemy)
+        //         {
+        //             health.Staggered.Do();
+        //         }
+        //     }
+        // }
     }
 }
 

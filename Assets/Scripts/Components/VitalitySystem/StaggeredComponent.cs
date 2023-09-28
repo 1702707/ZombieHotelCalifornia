@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Controller.Components.VitalitySystem;
 using UnityEngine;
 
 public class StaggeredComponent:MonoBehaviour
@@ -7,6 +8,7 @@ public class StaggeredComponent:MonoBehaviour
     private readonly float _staggeredTime = 2f;
     private IMovable _movable;
     private bool _inProgress;
+    private Action<Collision> _onHitAction;
 
     public bool InProgress => _inProgress;
 
@@ -31,5 +33,23 @@ public class StaggeredComponent:MonoBehaviour
         _inProgress = false;
         _movable.Move();
         this.enabled = false;
+    }
+
+    public void SetOnHeatAction(Action<Collision> action)
+    {
+        _onHitAction = action;
+    }
+    
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (InProgress && _onHitAction != null)
+        {
+            var health = collision.gameObject.GetComponent<HealthComponent>();
+            if (health != null && health.OwnerType == EntityType.Enemy)
+            {
+                _onHitAction.Invoke(collision);
+                _onHitAction = null;
+            }
+        }
     }
 }
