@@ -70,7 +70,6 @@ public class PlayerBowlController : BaseController
             var go = _pool.FirstOrDefault();
             go.Activate();
             go.gameObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-            _animator.SetTrigger("HoldBall");
             _pool.Remove(go);
             _currentBall = go;
         }
