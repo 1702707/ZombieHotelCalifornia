@@ -35,13 +35,14 @@ public class Zombie : HealthComponent, IMovable
     // Update is called once per frame
     void Update()
     {
-        
-        if(!_isMoving)
+
+        transform.LookAt(new Vector3(12, transform.position.y, transform.position.z));
+
+        if (!_isMoving)
             return;
         
         if (agent != null && !isDead)
         {
-        transform.LookAt(new Vector3(12, transform.position.y, transform.position.z));
             if (!reachedWaypoint)
             {
                 //When unit reaches initial waypoint, turn and move in a stright line towards the end of the corridor
@@ -87,8 +88,8 @@ public class Zombie : HealthComponent, IMovable
         if (agent != null)
             Destroy(agent);   
         //agent.enabled = false;
-        rb.useGravity = true;
-        rb.isKinematic = false;
+        //rb.useGravity = true;
+        //rb.isKinematic = false;
         //rb.AddForceAtPosition(new Vector3(-300, 0, 0), new Vector3(0,2,0));
 
         yield return new WaitForSeconds(despawnTimer);
@@ -105,12 +106,6 @@ public class Zombie : HealthComponent, IMovable
         {
            base.DoDamage(damage);
         }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.layer == 5)
-        StartCoroutine(ZombieDie());
     }
 
     protected override void onPunch()
@@ -131,6 +126,19 @@ public class Zombie : HealthComponent, IMovable
             }
         }
     }*/
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Controller.Components.BallComponent>() == null)
+            return;
+        Debug.Log($" Enter {other.gameObject.name}" + $" From {gameObject.name}");
+        HealthComponent health = gameObject.GetComponent<HealthComponent>();
+        float velocity = other.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
+        if (health != null && velocity > 0.1)
+        {
+            health.DoDamage(velocity * 5, 1);
+        }
+    }
 
 
     protected override void OnDamage()

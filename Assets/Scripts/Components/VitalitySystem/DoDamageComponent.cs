@@ -11,6 +11,7 @@ namespace Controller.Components.VitalitySystem
         public int Damage => _damage;
         public EntityType Target => _target;
 
+
         private void OnCollisionEnter(Collision collision)
         {
             Debug.Log($" Enter {collision.gameObject.name}");

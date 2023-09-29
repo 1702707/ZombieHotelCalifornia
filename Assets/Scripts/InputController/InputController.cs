@@ -60,7 +60,7 @@ public class InputController : MonoBehaviour, IDragHandler, IBeginDragHandler, I
 
     private void FireEvent()
     {
-        var force = Mathf.Clamp(_maxDistance,1,_maxStrenge)*10;
+        var force = Mathf.Clamp(_maxDistance,1,_maxStrenge);
         var direction = (_directionEndPoint - _directionStartPoint).normalized;
         var data = new InputData()
         {
