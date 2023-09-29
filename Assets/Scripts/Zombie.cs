@@ -35,13 +35,13 @@ public class Zombie : HealthComponent, IMovable
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(new Vector3(12, transform.position.y, transform.position.z));
         
         if(!_isMoving)
             return;
         
         if (agent != null && !isDead)
         {
+        transform.LookAt(new Vector3(12, transform.position.y, transform.position.z));
             if (!reachedWaypoint)
             {
                 //When unit reaches initial waypoint, turn and move in a stright line towards the end of the corridor
@@ -54,7 +54,7 @@ public class Zombie : HealthComponent, IMovable
             else
             {
                 //If unit is at the end of the corridor/in player attack zone, move to player
-                if (transform.position.x >= 12)
+                if (transform.position.x >= 10)
                 {
                     agent.SetDestination(playerPos);
                     //transform.LookAt(playerPos, Vector3.up);
@@ -105,6 +105,12 @@ public class Zombie : HealthComponent, IMovable
         {
            base.DoDamage(damage);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == 5)
+        StartCoroutine(ZombieDie());
     }
 
     protected override void onPunch()

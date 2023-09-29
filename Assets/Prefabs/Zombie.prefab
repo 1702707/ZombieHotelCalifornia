@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 7759898307528397118}
   - component: {fileID: 5768735390109736519}
   - component: {fileID: 5495398733866443388}
+  - component: {fileID: 2551951716245236009}
   m_Layer: 3
   m_Name: Zombie
   m_TagString: Untagged
@@ -180,7 +181,7 @@ MonoBehaviour:
   _maxHealth: 1
   _iKickable: 1
   _ownerType: 0
-  despawnTimer: 1
+  despawnTimer: 6
   _rigidbody: {fileID: 5768735390109736519}
   _animator: {fileID: 8748541903288111506}
   playerPos: {x: 14.25, y: 0, z: 0}
@@ -200,13 +201,13 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 40
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 2, z: 0.2}
+  m_Size: {x: 1.2, y: 2, z: 0.1}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &5768735390109736519
 Rigidbody:
@@ -216,10 +217,10 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7576592897217294572}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 30
   m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 1.5, z: 0}
+  m_AngularDrag: 3
+  m_CenterOfMass: {x: 0, y: 0.25, z: -1}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
@@ -228,7 +229,7 @@ Rigidbody:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 1
+  m_ImplicitCom: 0
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 1
@@ -249,3 +250,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 1
   _target: 1
+--- !u!136 &2551951716245236009
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7576592897217294572}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}

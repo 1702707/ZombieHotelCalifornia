@@ -10,6 +10,9 @@ public class Spawner : MonoBehaviour
     [SerializeField] private Wave[] waves;
     [SerializeField] private int waveToSpawn = 0;
 
+
+    [SerializeField] private Rounds[] rounds;
+
     [Header("Random Wave Waypoints")]
     [SerializeField] private Zombie prefab;
     [SerializeField] private Zombie crawler;
@@ -110,4 +113,11 @@ public class ZombieSpawn
     public Transform spawnPoint;
     public Transform waypoint;
     public float activationDelay;
+}
+
+[System.Serializable]
+public class Rounds
+{
+    public int waveToSpawn;
+    public float timeToNextWave;
 }
