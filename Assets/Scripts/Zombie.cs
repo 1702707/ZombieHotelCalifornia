@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Controller.Components.VitalitySystem;
 using UnityEngine;
 using UnityEngine.AI;
@@ -99,14 +98,15 @@ public class Zombie : HealthComponent, IMovable
         Destroy(this.gameObject);
     }
 
-    public override void DoDamage(float impulse, int damage)
+    public override void DoDamage(ContactPoint contact, int damage)
     {
         if(isDead)
             return;
         
-        if (impulse > toppleForce)
+        if (contact.impulse.magnitude > toppleForce)
         {
-           base.DoDamage(damage);
+           base.DoDamage(contact, damage);
+           base.DoKick(-0.01f * contact.impulse, null);
         }
     }
 
@@ -141,20 +141,6 @@ public class Zombie : HealthComponent, IMovable
     //         health.DoDamage(velocity * 5, 1);
     //     }
     // }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.GetComponent<Controller.Components.BallComponent>() == null)
-            return;
-        Debug.Log($" Enter {other.gameObject.name}" + $" From {gameObject.name}");
-        HealthComponent health = gameObject.GetComponent<HealthComponent>();
-        float velocity = other.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
-        if (health != null && velocity > 0.1)
-        {
-            health.DoDamage(velocity * 5, 1);
-        }
-    }
-
 
     protected override void OnDamage()
     {

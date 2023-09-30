@@ -1,3 +1,4 @@
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -14,11 +15,11 @@ namespace Controller.Components.VitalitySystem
 
         private void OnCollisionEnter(Collision collision)
         {
-            Debug.Log($" Enter {collision.gameObject.name}");
+            //Debug.Log($" Enter {collision.gameObject.name}");
             HealthComponent health = collision.gameObject.GetComponent<HealthComponent>();
             if (health != null && health.OwnerType == _target)
             {
-                health.DoDamage(collision.impulse.magnitude, _damage);
+                health.DoDamage(collision.contacts.First(), _damage);
             }
         }
         

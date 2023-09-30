@@ -8301,6 +8301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 931988646b2ea4fdcba5a9e00689715f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _minStrenge: 0
   _maxStrenge: 0
   _forceUI: {fileID: 0}
 --- !u!114 &890604574
@@ -8381,6 +8382,7 @@ RectTransform:
   - {fileID: 448132096}
   - {fileID: 2103725565}
   - {fileID: 1457694475}
+  - {fileID: 1359893314}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12559,6 +12561,8 @@ MonoBehaviour:
   _maxHealth: 1
   _iKickable: 0
   _ownerType: 1
+  _headshotEvent: {fileID: 0}
+  _headshotEffect: {fileID: 0}
   _rightArm: {fileID: 846618626}
   _leftArm: {fileID: 711971666}
   _rightLeg: {fileID: 1609616409}
@@ -13158,6 +13162,87 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1340347673}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1359893313
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1359893314}
+  - component: {fileID: 1359893315}
+  - component: {fileID: 1359893316}
+  m_Layer: 5
+  m_Name: ComboController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1359893314
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359893313}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 890604577}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1359893315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359893313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e3c116c1ab4446b857b983f5362e65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _headshotPrefab: {fileID: 1209858328936610294, guid: beffdc1ebe3604842b2698372cbe84fe, type: 3}
+  _headshotDelay: 1
+--- !u!114 &1359893316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359893313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 284184d781464ee0bf0b126f5c9aa910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: c8d220bc44cbe4cec8fd6d93deeb6028, type: 2}
+  onEventTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1359893315}
+        m_TargetAssemblyTypeName: Controller.Components.ComboController.ComboController,
+          Assembly-CSharp
+        m_MethodName: OnHeadshot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1363131354
 GameObject:
   m_ObjectHideFlags: 0
@@ -14588,8 +14673,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -20, y: 0}
-  m_SizeDelta: {x: 100, y: -200}
+  m_AnchoredPosition: {x: -20, y: -40}
+  m_SizeDelta: {x: 100, y: -120}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1489321273
 MonoBehaviour:
@@ -18659,7 +18744,11 @@ MonoBehaviour:
       waypoint: {fileID: 1586239456}
       activationDelay: 1.8
   waveToSpawn: 0
-  rounds: []
+  rounds:
+  - waveToSpawn: 1
+    timeToNextWave: 3
+  - waveToSpawn: 2
+    timeToNextWave: 3
   prefab: {fileID: -7690119386461372365, guid: 4aec417649b9d7647a0112626b985f56, type: 3}
   crawler: {fileID: -7690119386461372365, guid: bfe7d851acf7be3409f06ed33fb51a5a, type: 3}
   randomGapTime: 2
@@ -21102,7 +21191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 931988646b2ea4fdcba5a9e00689715f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxStrenge: 350
+  _minStrenge: 150
+  _maxStrenge: 550
   _forceUI: {fileID: 1489321272}
 --- !u!1 &2109449204
 GameObject:

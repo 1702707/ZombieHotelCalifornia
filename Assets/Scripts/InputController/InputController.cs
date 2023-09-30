@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class InputController : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
+    [SerializeField] private float _minStrenge;
     [SerializeField] private float _maxStrenge;
     [SerializeField] private Transform _forceUI;
 
@@ -64,7 +65,8 @@ public class InputController : MonoBehaviour, IDragHandler, IBeginDragHandler, I
             {
                 _maxDistance = distance;
                 _directionStartPoint = eventData.position;
-                var force = Mathf.Clamp(_maxDistance,1,_maxStrenge)/_maxStrenge;
+                var diff = _maxStrenge - _minStrenge;
+                var force = Mathf.Clamp(_maxDistance,1, diff)/diff;
                 SetUIBarPercent(force);
             }
             else
@@ -96,8 +98,13 @@ public class InputController : MonoBehaviour, IDragHandler, IBeginDragHandler, I
 
     private void FireEvent()
     {
-        var force = Mathf.Clamp(_maxDistance,1,_maxStrenge);
-        var direction = (_directionEndPoint - _directionStartPoint).normalized;
+        var force = Mathf.Clamp(_maxDistance,_minStrenge,_maxStrenge);
+        var div = _directionEndPoint - _directionStartPoint;
+        if (div is { x: <= 0.5f, y: <= 0.5f })
+        {
+            div = 10*Vector2.up;
+        }
+        var direction = div.normalized;
         var data = new InputData()
         {
             Force = force,

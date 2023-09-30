@@ -1,4 +1,5 @@
 using System;
+using Controller.Components.Events;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -10,6 +11,8 @@ namespace Controller.Components.VitalitySystem
         [SerializeField] private int _maxHealth;
         [SerializeField] private bool _iKickable;
         [SerializeField] private EntityType _ownerType;
+        [SerializeField] private HeadshotEvent _headshotEvent;
+        [SerializeField] private ParticleSystem _headshotEffect;
 
         public int CurrentHP => _currentHp;
         public int MaxHP => _maxHealth;
@@ -33,8 +36,18 @@ namespace Controller.Components.VitalitySystem
         protected abstract void OnDamage();
         protected abstract void OnKick(Vector3 force, Action callback);
 
-        public virtual void DoDamage(float impulse, int damage)
+        public virtual void DoDamage(ContactPoint contact, int damage)
         {
+            if (_ownerType == EntityType.Enemy)
+            {
+                if (contact.otherCollider.tag == "Head")
+                {
+                   if(_headshotEffect != null) 
+                       _headshotEffect?.Play();
+                    _headshotEvent.TriggerEvent(contact); 
+                }
+            }
+            
             DoDamage(damage);
         }
 
