@@ -44,6 +44,7 @@ namespace Controller.Components
         public void Activate()
         {
             this.gameObject.SetActive(true);
+            _collider.isTrigger = true;
             _rigidbody.WakeUp();
         }
 

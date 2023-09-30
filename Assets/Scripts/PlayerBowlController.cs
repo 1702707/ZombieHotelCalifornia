@@ -27,6 +27,7 @@ public class PlayerBowlController : BaseController
     private void OnStartInput()
     {
         ShowBall();
+        _animator.SetBool("Measure", true);
     }
 
     public void ShowBall()
@@ -50,12 +51,12 @@ public class PlayerBowlController : BaseController
     {
         var ball = _currentBall;
         ball?.Push(data);
+        _animator.SetBool("Measure", false);
         _animator.SetTrigger("ThrowBall");
         ball?.SubscribeOnLifetimeEnd(() =>
         {
             ball.Release();
             _pool.Add(ball);
-            SetupBall();
         });
         _currentBall = null;
     }
