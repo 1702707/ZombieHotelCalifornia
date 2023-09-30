@@ -20,14 +20,13 @@ namespace Controller.Player
                 {
                     var force = _kickForce * Vector3.left;
                     
-                    if (enemy.Value.Staggered.InProgress)
+                    if (health.Staggered.InProgress)
                     {
-                       health.DoKick(force); 
+                       health.DoKick(force, ()=>{health.DoDamage(_damage);}); 
                        health.Staggered.SetOnHeatAction((collision)=>
                        {
                            var other = collision.gameObject.GetComponent<HealthComponent>();
                            other.DoDamage(_damage);
-                           health.DoDamage(_damage);
                        });
                     }
                     else

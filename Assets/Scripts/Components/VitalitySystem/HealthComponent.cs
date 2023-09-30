@@ -31,7 +31,7 @@ namespace Controller.Components.VitalitySystem
         }
 
         protected abstract void OnDamage();
-        protected abstract void OnKick(Vector3 force);
+        protected abstract void OnKick(Vector3 force, Action callback);
 
         public virtual void DoDamage(float impulse, int damage)
         {
@@ -47,7 +47,7 @@ namespace Controller.Components.VitalitySystem
             }
         }
 
-        public virtual void DoKick(Vector3 force)
+        public virtual void DoKick(Vector3 force, Action callback)
         {
             if (_iKickable)
             {
@@ -56,7 +56,7 @@ namespace Controller.Components.VitalitySystem
                 {
                     
                 }
-                OnKick(force);
+                OnKick(force, callback);
             }
         }
 

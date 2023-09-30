@@ -12,7 +12,7 @@ namespace Controller.Components.VitalitySystem
             if (health != null && health.OwnerType == _target)
             {
                 var force = (collision.gameObject.transform.position - this.gameObject.transform.position).normalized;
-                health.DoKick(force);
+                health.DoKick(force, null);
             }
         } 
     }

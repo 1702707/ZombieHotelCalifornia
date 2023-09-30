@@ -24,10 +24,10 @@ namespace Controller.Player
                     health.Staggered.SetOnHeatAction((collision)=>
                     {
                         var otherHealth = collision.gameObject.GetComponent<HealthComponent>();
-                        otherHealth.DoKick(_kickForce * Vector3.left);
+                        otherHealth.DoKick(_kickForce * Vector3.left, null);
                         otherHealth.DoPunch();
                     });
-                    health.DoKick(_kickForce * Vector3.left);
+                    health.DoKick(_kickForce * Vector3.left, null);
                 }
                 else
                 {

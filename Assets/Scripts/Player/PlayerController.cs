@@ -65,7 +65,7 @@ public class PlayerController : HealthComponent
         }
     }
 
-    protected override void OnKick(Vector3 force)
+    protected override void OnKick(Vector3 force, Action callback)
     {
     }
 

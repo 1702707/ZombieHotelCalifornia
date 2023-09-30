@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Controller.Components.VitalitySystem;
@@ -31,6 +32,7 @@ public class Zombie : HealthComponent, IMovable
         isDead = false;
         ResetHealth();
         Move();
+        
     }
     // Update is called once per frame
     void Update()
@@ -126,6 +128,19 @@ public class Zombie : HealthComponent, IMovable
             }
         }
     }*/
+    
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     if (other.GetComponent<Controller.Components.BallComponent>() == null)
+    //         return;
+    //     Debug.Log($" Enter {other.gameObject.name}" + $" From {gameObject.name}");
+    //     HealthComponent health = gameObject.GetComponent<HealthComponent>();
+    //     float velocity = other.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
+    //     if (health != null && velocity > 0.1)
+    //     {
+    //         health.DoDamage(velocity * 5, 1);
+    //     }
+    // }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -149,19 +164,20 @@ public class Zombie : HealthComponent, IMovable
         }
     }
 
-    protected override void OnKick(Vector3 force)
+    protected override void OnKick(Vector3 force, Action callback)
     {
         // rb.useGravity = true;
         rb.isKinematic = false;
         _rigidbody.AddForce(force, ForceMode.Impulse);
-        StartCoroutine(Delay(0.5f));
+        StartCoroutine(Delay(0.5f, callback));
     }
 
-    private IEnumerator Delay(float delay)
+    private IEnumerator Delay(float delay, Action callback)
     {
         yield return new WaitForSeconds(delay);
         // rb.useGravity = false;
         rb.isKinematic = true;
+        callback?.Invoke();
     }
 
     public void Move()
