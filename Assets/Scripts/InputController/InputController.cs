@@ -18,36 +18,41 @@ public class InputController : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     private bool _forceMeasure;
     private List<Image> _uiParts;
 
-    private void Awake()
+    private void Start()
     {
-        _uiParts = new List<Image>();
-        for (var i = 0; i < _forceUI.childCount; i++)
+        if (_forceUI != null)
         {
-            var image = _forceUI.transform.GetChild(i).GetComponent<Image>();
-            var imageColor = image.color;
-            imageColor.a = 0;
-            image.color = imageColor;
-            _uiParts.Add(image);
+           _uiParts = new List<Image>();
+           for (var i = 0; i < _forceUI.childCount; i++)
+           {
+               var image = _forceUI.transform.GetChild(i).GetComponent<Image>();
+               SetImageColor(image,0);
+               _uiParts.Add(image);
+           } 
         }
-        
+    }
+    
+    private void SetImageColor(Image image, float alpha)
+    {
+        var imageColor = image.color;
+        imageColor.a = alpha;
+        image.color = imageColor;
+    }
+
+    private void SetUIBarPercent(float percent)
+    {
+        var visibleCount = Math.Round(percent * _uiParts.Count);
+        for (var index = 0; index < _uiParts.Count; index++)
+        {
+            var uiPart = _uiParts[index];
+            SetImageColor(uiPart, index<visibleCount? 1: 0);
+        }
     }
 
     private void Update()
     {
         Debug.DrawLine(_startPoint,_directionStartPoint, Color.red);
         Debug.DrawLine(_directionStartPoint, _directionEndPoint, Color.blue);
-        if (_forceMeasure)
-        {
-            var force = Mathf.Clamp(_maxDistance,1,_maxStrenge)/_maxStrenge;
-            var visibleCount = Math.Round(force * _uiParts.Count);
-            for (var index = 0; index < _uiParts.Count; index++)
-            {
-                var uiPart = _uiParts[index];
-                var uiPartColor = uiPart.color;
-                uiPartColor.a = index<visibleCount? 1: 0;
-                uiPart.color = uiPartColor;
-            }
-        }
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -59,6 +64,8 @@ public class InputController : MonoBehaviour, IDragHandler, IBeginDragHandler, I
             {
                 _maxDistance = distance;
                 _directionStartPoint = eventData.position;
+                var force = Mathf.Clamp(_maxDistance,1,_maxStrenge)/_maxStrenge;
+                SetUIBarPercent(force);
             }
             else
             {
@@ -83,6 +90,7 @@ public class InputController : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     public void OnEndDrag(PointerEventData eventData)
     {
         _directionEndPoint = eventData.position;
+        SetUIBarPercent(0);
         FireEvent();
     }
 
