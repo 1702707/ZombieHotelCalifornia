@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Controller.Components.VitalitySystem;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.Serialization;
@@ -42,7 +43,7 @@ namespace Controller.Components.ComboController
         {
             Debug.Log("HEADSHOT");
             var effect = _headshotPool.Get();
-            effect.transform.position = new Vector3(contact.point.x, 2.5f, contact.point.z);
+            effect.transform.position = new Vector3(contact.point.x, contact.point.y + 0.5f, contact.point.z);
             //effect.transform.rotation = Quaternion.FromToRotation(Vector3.left, contact.normal);
             StartCoroutine(ReturnToPoolWithDelay(effect, _headshotPool, _headshotDelay));
             _headshotCount++;

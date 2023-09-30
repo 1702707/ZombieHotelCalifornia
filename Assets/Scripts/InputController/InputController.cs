@@ -50,12 +50,6 @@ public class InputController : MonoBehaviour, IDragHandler, IBeginDragHandler, I
         }
     }
 
-    private void Update()
-    {
-        Debug.DrawLine(_startPoint,_directionStartPoint, Color.red);
-        Debug.DrawLine(_directionStartPoint, _directionEndPoint, Color.blue);
-    }
-
     public void OnDrag(PointerEventData eventData)
     {
         if (_forceMeasure && _directionStartPoint.y > eventData.position.y)
