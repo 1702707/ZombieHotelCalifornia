@@ -4,8 +4,8 @@ using UnityEngine.Events;
 
 namespace Controller.Components.Events
 {
-    [CreateAssetMenu(menuName = "Game/KillEnemyEvent")]
-    public class KillEnemyEvent : BaseDamageDataEvent
+    [CreateAssetMenu(menuName = "Game/KnockEnemyEvent")]
+    public class KnockEvent : BaseDamageDataEvent
     {
         
     }

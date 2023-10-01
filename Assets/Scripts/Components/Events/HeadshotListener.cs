@@ -3,22 +3,7 @@ using UnityEngine.Events;
 
 namespace Controller.Components.Events
 {
-    public class HeadshotListener : MonoBehaviour 
+    public class HeadshotListener : BaseDamageDataListener<HeadshotEvent>
     {
-        public HeadshotEvent gameEvent;
-        public UnityEvent<DamageData> onEventTriggered;
-
-        void OnEnable() {
-            gameEvent.AddListener(this);
-        }
-
-        void OnDisable() {
-            gameEvent.RemoveListener(this);
-        }
-
-        public void OnEventTriggered(DamageData contactPoint)
-        {
-            onEventTriggered.Invoke(contactPoint);
-        }
     }
 }

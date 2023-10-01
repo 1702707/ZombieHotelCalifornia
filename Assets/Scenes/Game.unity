@@ -1689,6 +1689,7 @@ MonoBehaviour:
   _kickForce: 10
   _damage: 1
   _delay: 1
+  _knockEvent: {fileID: 11400000, guid: b89986687034a471f90aeb8c8a5ec546, type: 2}
 --- !u!43 &188301530
 Mesh:
   m_ObjectHideFlags: 0
@@ -12796,6 +12797,7 @@ MonoBehaviour:
   _ownerType: 1
   _headshotEvent: {fileID: 0}
   _killEnemyEvent: {fileID: 0}
+  _knockEvent: {fileID: 0}
   _damageEvent: {fileID: 0}
   _headshotEffect: {fileID: 0}
   _height: 0
@@ -13412,6 +13414,7 @@ GameObject:
   - component: {fileID: 1359893316}
   - component: {fileID: 1359893318}
   - component: {fileID: 1359893317}
+  - component: {fileID: 1359893319}
   m_Layer: 5
   m_Name: ComboController
   m_TagString: Untagged
@@ -13535,6 +13538,35 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Controller.Components.ComboController.ComboController,
           Assembly-CSharp
         m_MethodName: OnKill
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1359893319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359893313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8baa89c525d94867af4a706230fcc2d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: b89986687034a471f90aeb8c8a5ec546, type: 2}
+  onEventTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1359893315}
+        m_TargetAssemblyTypeName: Controller.Components.ComboController.ComboController,
+          Assembly-CSharp
+        m_MethodName: OnKnock
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16368,6 +16400,7 @@ MonoBehaviour:
   _kickForce: 10
   _damage: 1
   _delay: 1
+  _knockEvent: {fileID: 11400000, guid: b89986687034a471f90aeb8c8a5ec546, type: 2}
 --- !u!1 &1622610472
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace Controller.Components.Events
 {
-    public class KillEnemyListener: BaseDamageDataListener<KillEnemyEvent>
+    public class KnockListener: BaseDamageDataListener<KnockEvent>
     {
     }
 }

@@ -13,6 +13,7 @@ namespace Controller.Components.VitalitySystem
         [SerializeField] private EntityType _ownerType;
         [SerializeField] private HeadshotEvent _headshotEvent;
         [SerializeField] private KillEnemyEvent _killEnemyEvent;
+        [SerializeField] private KnockEvent _knockEvent;
         [SerializeField] private DamageEvent _damageEvent;
         [SerializeField] private ParticleSystem _headshotEffect;
         [SerializeField] private float _height;
@@ -80,7 +81,7 @@ namespace Controller.Components.VitalitySystem
             if (_iKickable)
             {
                 _status = HealthState.Knocked;
-          
+                
                 OnKick(force, callback);
             }
         }
@@ -131,6 +132,7 @@ public enum HealthState
 public class DamageData
 {
     public Vector3 HitPoint;
+    public float Height;
     public GameObject Target;
     public Vector3 Impulse;
     public int SourceID;

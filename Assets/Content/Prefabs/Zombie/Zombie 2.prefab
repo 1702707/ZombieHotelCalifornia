@@ -236,12 +236,13 @@ MonoBehaviour:
   _ownerType: 0
   _headshotEvent: {fileID: 11400000, guid: c8d220bc44cbe4cec8fd6d93deeb6028, type: 2}
   _killEnemyEvent: {fileID: 11400000, guid: c41adbf296c0044acbade630faeec04b, type: 2}
+  _knockEvent: {fileID: 0}
   _damageEvent: {fileID: 11400000, guid: c9b101b9fe68f4dc4af9047732a8d006, type: 2}
   _headshotEffect: {fileID: 0}
   _height: 2.5
   toppleForce: 15
   wp: {fileID: 0}
-  despawnTimer: 1
+  despawnTimer: 2
   _rigidbody: {fileID: 5768735390109736519}
   _animator: {fileID: 8748541903288111506}
   reachedWaypoint: 0

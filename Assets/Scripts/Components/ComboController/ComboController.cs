@@ -62,7 +62,7 @@ namespace Controller.Components.ComboController
             if (effect != null)
             {
                 effect.sprite = data.Sprite;
-                effect.transform.position = contact.HitPoint;
+                effect.transform.position = new Vector3(contact.HitPoint.x, contact.Height, contact.HitPoint.z);
                 StartCoroutine(ReturnToPoolWithDelay(effect, _itemPool, _comboDelay));
             }
             
@@ -98,7 +98,7 @@ namespace Controller.Components.ComboController
                if (effect != null)
                {
                    effect.sprite = combo.Sprite;
-                   effect.transform.position = new Vector3(data.HitPoint.x, data.HitPoint.y, data.HitPoint.z);
+                   effect.transform.position = new Vector3(data.HitPoint.x, data.Height, data.HitPoint.z);
                    StartCoroutine(ReturnToPoolWithDelay(effect, _itemPool, _comboDelay));
                }
                else
@@ -109,6 +109,32 @@ namespace Controller.Components.ComboController
             
             Score += combo.Score;
             _totalKillCount++; 
+        }
+        
+        public void OnKnock(DamageData data)
+        {
+            var combo = _comboData.GetData(ComboType.Knock);
+
+            if (combo == null)
+            {
+                Debug.LogError($"CAUTION! Combo == null type - Knock");
+                return;
+            }
+            
+            
+            SpriteRenderer effect = _itemPool.Get();
+            if (effect != null)
+            {
+                effect.sprite = combo.Sprite;
+                effect.transform.position = data.HitPoint;
+                StartCoroutine(ReturnToPoolWithDelay(effect, _itemPool, _comboDelay));
+            }
+            else
+            {
+                Debug.LogError("CAUTION! Effect = null");
+            }
+            
+            Score += combo.Score;
         }
 
         private int IncreaseCounter(int id)
