@@ -28,6 +28,7 @@ namespace Controller.Player
 
         private void OnTriggerEnter(Collider other)
         {
+            var collisionPoint = other.ClosestPoint(transform.position);
             var health = other.GetComponent<HealthComponent>();
             if(health != null && health.OwnerType == _target)
                 _enemies[other.GetHashCode()] = health;

@@ -4,13 +4,13 @@ using UnityEngine.Events;
 
 namespace Controller.Components.Events
 {
-    [CreateAssetMenu(menuName = "Game/HeadShot Event")]
+    [CreateAssetMenu(menuName = "Game/HeadShotEvent")]
     public class HeadshotEvent: ScriptableObject 
     {
-        public UnityEvent<ContactPoint> onEventTriggered;
+        public UnityEvent<Vector3> onEventTriggered;
         List<HeadshotListener> listeners = new List<HeadshotListener>();
 
-        public void TriggerEvent(ContactPoint point) {
+        public void TriggerEvent(Vector3 point) {
             for (int i = listeners.Count - 1; i >= 0; i--)
                 listeners[i].OnEventTriggered(point);
         }

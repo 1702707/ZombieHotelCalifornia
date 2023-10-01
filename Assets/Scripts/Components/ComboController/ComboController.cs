@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Controller.Components.VitalitySystem;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.Serialization;
@@ -18,6 +17,7 @@ namespace Controller.Components.ComboController
         private IObjectPool<GameObject> _headshotPool;
 
         private int _headshotCount;
+        private int _totalKillCount;
 
         private void Awake()
         {
@@ -39,13 +39,21 @@ namespace Controller.Components.ComboController
             return Instantiate(_headshotPrefab);
         }
 
-        public void OnHeadshot(ContactPoint contact)
+        public void OnHeadshot(Vector3 contact)
         {
             var effect = _headshotPool.Get();
-            effect.transform.position = new Vector3(contact.point.x, contact.point.y + 0.5f, contact.point.z);
+            effect.transform.position = new Vector3(contact.x, contact.y + 0.5f, contact.z);
             //effect.transform.rotation = Quaternion.FromToRotation(Vector3.left, contact.normal);
             StartCoroutine(ReturnToPoolWithDelay(effect, _headshotPool, _headshotDelay));
             _headshotCount++;
+        }
+        
+        public void OnHeadshot(DamageData data)
+        {
+            // var effect = _headshotPool.Get();
+            // effect.transform.position = new Vector3(data.HitPoint.x, data.HitPoint.y, data.HitPoint.z);
+            // StartCoroutine(ReturnToPoolWithDelay(effect, _headshotPool, _headshotDelay));
+            _totalKillCount++;
         }
 
         private IEnumerator ReturnToPoolWithDelay<T>(T effect, IObjectPool<T> pool, float delay) where T : class

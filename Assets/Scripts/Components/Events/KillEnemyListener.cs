@@ -3,10 +3,10 @@ using UnityEngine.Events;
 
 namespace Controller.Components.Events
 {
-    public class HeadshotListener : MonoBehaviour 
+    public class KillEnemyListener: MonoBehaviour
     {
-        public HeadshotEvent gameEvent;
-        public UnityEvent<Vector3> onEventTriggered;
+        public KillEnemyEvent gameEvent;
+        public UnityEvent<DamageData> onEventTriggered;
 
         void OnEnable() {
             gameEvent.AddListener(this);
@@ -16,7 +16,7 @@ namespace Controller.Components.Events
             gameEvent.RemoveListener(this);
         }
 
-        public void OnEventTriggered(Vector3 contactPoint)
+        public void OnEventTriggered(DamageData contactPoint)
         {
             onEventTriggered.Invoke(contactPoint);
         }

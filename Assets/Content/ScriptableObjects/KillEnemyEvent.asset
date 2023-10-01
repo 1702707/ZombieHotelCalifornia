@@ -9,6 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25cd2c1f9620435f80dbd032e4408bf3, type: 3}
-  m_Name: Headshot Event
+  m_Script: {fileID: 11500000, guid: c4bbe5ca7d114facb4e134c25905210f, type: 3}
+  m_Name: KillEnemyEvent
   m_EditorClassIdentifier: 
+  onEventTriggered:
+    m_PersistentCalls:
+      m_Calls: []

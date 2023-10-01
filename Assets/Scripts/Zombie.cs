@@ -98,15 +98,15 @@ public class Zombie : HealthComponent, IMovable
         Destroy(this.gameObject);
     }
 
-    public override void DoDamage(ContactPoint contact, int damage)
+    public override void DoDamage(DamageData contact, int damage)
     {
         if(isDead)
             return;
         
-        if (contact.impulse.magnitude > toppleForce)
+        if (contact.Impulse.magnitude > toppleForce)
         {
            base.DoDamage(contact, damage);
-           base.DoKick(-0.01f * contact.impulse, null);
+           base.DoKick(-0.01f * contact.Impulse, null);
         }
     }
 

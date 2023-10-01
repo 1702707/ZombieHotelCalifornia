@@ -14,6 +14,7 @@ public class PlayerBowlController : BaseController
 
     private List<IBallComponent> _pool = new List<IBallComponent>();
     private IBallComponent _currentBall;
+    private int _ballID = 0;
 
     protected override void OnInitialize()
     {
@@ -71,8 +72,10 @@ public class PlayerBowlController : BaseController
             var go = _pool.FirstOrDefault();
             go.Activate();
             go.gameObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+            go.gameObject.name = _ballID.ToString();
             _pool.Remove(go);
             _currentBall = go;
+            _ballID++;
         }
         else
         {

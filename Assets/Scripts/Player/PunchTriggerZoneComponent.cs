@@ -14,7 +14,7 @@ namespace Controller.Player
 
         public float Delay => _delay;
 
-        public void DoPunch()
+        public void DoPunch(int i)
         {
             foreach (var pair in Enemies)
             {

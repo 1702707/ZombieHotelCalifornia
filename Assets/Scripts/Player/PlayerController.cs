@@ -14,7 +14,8 @@ public class PlayerController : HealthComponent
     
     private float _currentDelay;
     private double _expDelaySeconds;
-    
+    private int _actionId;
+
 
     void Update()
     {
@@ -51,10 +52,11 @@ public class PlayerController : HealthComponent
         }
     }
 
-    private IEnumerator DoActionWithDelay(float delay, Action doPunch)
+    private IEnumerator DoActionWithDelay(float delay, Action<int> doPunch)
     {
         yield return new WaitForSeconds(delay);
-        doPunch.Invoke();
+        doPunch.Invoke(_actionId);
+        _actionId++;
     }
 
     protected override void OnDamage()
