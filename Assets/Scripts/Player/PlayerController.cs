@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Controller.Components.ComboController;
 using Controller.Components.VitalitySystem;
 using Controller.Player;
 using UnityEngine;
@@ -55,8 +56,8 @@ public class PlayerController : HealthComponent
     private IEnumerator DoActionWithDelay(float delay, Action<int> doPunch)
     {
         yield return new WaitForSeconds(delay);
+        _actionId = IDGenerator.Get();
         doPunch.Invoke(_actionId);
-        _actionId++;
     }
 
     protected override void OnDamage()

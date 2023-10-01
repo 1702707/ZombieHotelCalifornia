@@ -7,10 +7,9 @@ namespace Controller.Components.Events
     [CreateAssetMenu(menuName = "Game/HeadShotEvent")]
     public class HeadshotEvent: ScriptableObject 
     {
-        public UnityEvent<Vector3> onEventTriggered;
         List<HeadshotListener> listeners = new List<HeadshotListener>();
 
-        public void TriggerEvent(Vector3 point) {
+        public void TriggerEvent(DamageData point) {
             for (int i = listeners.Count - 1; i >= 0; i--)
                 listeners[i].OnEventTriggered(point);
         }

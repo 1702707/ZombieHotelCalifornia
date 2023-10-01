@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f68dd99b917547d89cef31b887c80079, type: 3}
+  m_Name: ComboDataScriptableObject
+  m_EditorClassIdentifier: 
+  DamageScore: 1
+  _comboDatas:
+  - Type: 0
+    Sprite: {fileID: 21300000, guid: d5fcbd047a20abc48bc9a4a42f24e19a, type: 3}
+    Score: 2
+  - Type: 1
+    Sprite: {fileID: 0}
+    Score: 1
+  - Type: 0
+    Sprite: {fileID: 21300000, guid: 489f55d07a43e7146ae9153385efc060, type: 3}
+    Score: 2
+  - Type: 3
+    Sprite: {fileID: 21300000, guid: 8d0164528cf0557499df2da928993ff7, type: 3}
+    Score: 3
+  - Type: 4
+    Sprite: {fileID: 21300000, guid: 04d4bcf3c9a5e6b4aab9bd22f1e27f52, type: 3}
+    Score: 4
+  - Type: 5
+    Sprite: {fileID: 21300000, guid: 6cc24305bf9d41846a677e87a1de6bc3, type: 3}
+    Score: 5
+  - Type: 6
+    Sprite: {fileID: 21300000, guid: 15569d5645ae29043acd9e9618aabb16, type: 3}
+    Score: 6
+  - Type: 7
+    Sprite: {fileID: 21300000, guid: 4b45b3169e577fd408f38f5023e3bf9d, type: 3}
+    Score: 10
+  - Type: 8
+    Sprite: {fileID: 21300000, guid: 6fb1bbb2a22d65b46a90b44ac19ebd31, type: 3}
+    Score: 0
+  - Type: 9
+    Sprite: {fileID: 21300000, guid: cd37cb5731ca1f9458d3eae07a0f967e, type: 3}
+    Score: 0

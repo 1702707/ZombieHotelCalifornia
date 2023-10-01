@@ -20,9 +20,9 @@ namespace Controller.Player
                 var data = new DamageData
                 {
                     HitPoint = new Vector3(point.x,enemy.Value.Height,point.z),
-                    Collider = enemy.Value.gameObject,
+                    Target = enemy.Value.gameObject,
                     Impulse = Vector3.forward,
-                    ID = Id
+                    SourceID = Id
                 };
                 if (health != null && health.OwnerType == _target)
                 {

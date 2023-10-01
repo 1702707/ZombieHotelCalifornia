@@ -13,6 +13,7 @@ namespace Controller.Components.VitalitySystem
         [SerializeField] private EntityType _ownerType;
         [SerializeField] private HeadshotEvent _headshotEvent;
         [SerializeField] private KillEnemyEvent _killEnemyEvent;
+        [SerializeField] private DamageEvent _damageEvent;
         [SerializeField] private ParticleSystem _headshotEffect;
         [SerializeField] private float _height;
 
@@ -41,23 +42,29 @@ namespace Controller.Components.VitalitySystem
 
         public virtual void DoDamage(DamageData contact, int damage)
         {
-            if (_ownerType == EntityType.Enemy)
-            {
-                if (contact.Collider.tag == "Head")
-                {
-                   if(_headshotEffect != null) 
-                       _headshotEffect?.Play();
-                    _headshotEvent.TriggerEvent(contact.HitPoint); 
-                }
-            }
-            
             if (_currentHp > 0)
             {
                 _currentHp = Mathf.Clamp(_currentHp - damage, 0, _maxHealth);
+
+                if (_ownerType == EntityType.Enemy)
+                {
+                    _damageEvent.TriggerEvent(contact);
+                    contact.HitPoint.y = _height;
+                    
+                    if (contact.Target.tag == "Head")
+                    {
+                        if(_headshotEffect != null) 
+                            _headshotEffect?.Play();
+                        
+                        _headshotEvent.TriggerEvent(contact);
+                        _currentHp = 0;
+                    }
+                    else if (_currentHp == 0)
+                    {
+                        _killEnemyEvent.TriggerEvent(contact);
+                    }
+                }
                 OnDamage();
-                
-                if(_currentHp == 0)
-                    _killEnemyEvent.TriggerEvent(contact);
             }
         }
 
@@ -66,10 +73,7 @@ namespace Controller.Components.VitalitySystem
             if (_iKickable)
             {
                 _status = HealthState.Knocked;
-                if (Staggered.InProgress)
-                {
-                    
-                }
+          
                 OnKick(force, callback);
             }
         }
@@ -120,7 +124,7 @@ public enum HealthState
 public class DamageData
 {
     public Vector3 HitPoint;
-    public GameObject Collider;
+    public GameObject Target;
     public Vector3 Impulse;
-    public int ID;
+    public int SourceID;
 }
