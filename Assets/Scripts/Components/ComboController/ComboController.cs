@@ -85,6 +85,12 @@ namespace Controller.Components.ComboController
 
             Debug.Log(data.SourceID + " "+count);
             var combo = _comboData.GetData(count.ToComboType());
+
+            if (combo == null)
+            {
+                Debug.LogError($"CAUTION! Combo == null count - {count} type - {count.ToComboType()}");
+                return;
+            }
             
             if (count > 1)
             {
