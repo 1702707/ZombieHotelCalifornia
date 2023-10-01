@@ -35,8 +35,8 @@ namespace Controller.Components.ComboController
 
         private void Awake()
         {
-            _itemPool = new LinkedPool<SpriteRenderer>(()=>CreateItem(_comboPrefab), OnGetItem, ReleaseItem, null, false, 1);
-            _damagePool = new LinkedPool<Transform>(() => CreateItem(_damagePrefab), OnGetItem, ReleaseItem, null, false, 1);
+            _itemPool = new LinkedPool<SpriteRenderer>(()=>CreateItem(_comboPrefab), OnGetItem, ReleaseItem, null, false, 20);
+            _damagePool = new LinkedPool<Transform>(() => CreateItem(_damagePrefab), OnGetItem, ReleaseItem, null, false, 20);
         }
 
         private T CreateItem<T>(T prefab) where T:Component
@@ -56,12 +56,15 @@ namespace Controller.Components.ComboController
 
         public void OnHeadshot(DamageData contact)
         {
-            var effect = _itemPool.Get();
             var data = _comboData.GetData(ComboType.Headshot);
-            effect.sprite = data.Sprite;
-            effect.transform.position = new Vector3(contact.HitPoint.x, contact.HitPoint.y + 0.5f, contact.HitPoint.z);
-            //effect.transform.rotation = Quaternion.FromToRotation(Vector3.left, contact.normal);
-            StartCoroutine(ReturnToPoolWithDelay(effect, _itemPool, _comboDelay));
+            var effect = _itemPool.Get();
+            
+            if (effect != null)
+            {
+                effect.sprite = data.Sprite;
+                effect.transform.position = contact.HitPoint;
+                StartCoroutine(ReturnToPoolWithDelay(effect, _itemPool, _comboDelay));
+            }
             
             IncreaseCounter(contact.SourceID);
             _headshotCount++;
@@ -86,9 +89,16 @@ namespace Controller.Components.ComboController
             if (count > 1)
             {
                SpriteRenderer effect = _itemPool.Get();
-               effect.sprite = combo.Sprite;
-               effect.transform.position = new Vector3(data.HitPoint.x, data.HitPoint.y, data.HitPoint.z);
-               StartCoroutine(ReturnToPoolWithDelay(effect, _itemPool, _comboDelay));
+               if (effect != null)
+               {
+                   effect.sprite = combo.Sprite;
+                   effect.transform.position = new Vector3(data.HitPoint.x, data.HitPoint.y, data.HitPoint.z);
+                   StartCoroutine(ReturnToPoolWithDelay(effect, _itemPool, _comboDelay));
+               }
+               else
+               {
+                   Debug.LogError("CAUTION! Effect = null");
+               }
             }
             
             Score += combo.Score;

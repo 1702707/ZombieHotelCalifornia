@@ -73,10 +73,7 @@ namespace Controller.Components.VitalitySystem
             if (_iKickable)
             {
                 _status = HealthState.Knocked;
-                if (Staggered.InProgress)
-                {
-                    
-                }
+          
                 OnKick(force, callback);
             }
         }

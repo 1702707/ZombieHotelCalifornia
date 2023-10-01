@@ -13330,7 +13330,7 @@ MonoBehaviour:
   _damagePrefab: {fileID: 1118178574302888346, guid: 2f07b6f93a263427aa797f3d13ababbd, type: 3}
   _comboDelay: 0.5
   _damageDelay: 0.75
-  _scoreText: {fileID: 2085566632}
+  _scoreText: {fileID: 1873125303}
 --- !u!114 &1359893316
 MonoBehaviour:
   m_ObjectHideFlags: 0
