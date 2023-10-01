@@ -16,6 +16,7 @@ namespace Controller.Components.VitalitySystem
         [SerializeField] private DamageEvent _damageEvent;
         [SerializeField] private ParticleSystem _headshotEffect;
         [SerializeField] private float _height;
+        public float toppleForce;
 
         public int CurrentHP => _currentHp;
         public int MaxHP => _maxHealth;
@@ -58,15 +59,21 @@ namespace Controller.Components.VitalitySystem
                         
                         _headshotEvent.TriggerEvent(contact);
                         _currentHp = 0;
+                        OnHeadshot();
                     }
-                    else if (_currentHp == 0)
+                    else if (_currentHp <= 0)
                     {
                         _killEnemyEvent.TriggerEvent(contact);
+                        OnDeath();
                     }
                 }
                 OnDamage();
             }
         }
+
+        protected abstract void OnDeath();
+
+        protected abstract void OnHeadshot();
 
         public virtual void DoKick(Vector3 force, Action callback)
         {

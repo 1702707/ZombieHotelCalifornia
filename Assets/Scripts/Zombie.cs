@@ -7,11 +7,7 @@ using UnityEngine.AI;
 public class Zombie : HealthComponent, IMovable
 {
     public GameObject wp;
-
-
-
-
-
+    
     [SerializeField] private float despawnTimer;
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private Animator _animator;
@@ -23,8 +19,7 @@ public class Zombie : HealthComponent, IMovable
     //Temporary standin for player
     public Vector3 playerPos;
     public bool alive = true;
-
-    public float toppleForce;
+    
     public bool isDead;
 
     private bool _isMoving;
@@ -92,7 +87,7 @@ public class Zombie : HealthComponent, IMovable
     public IEnumerator ZombieDie()
     {
         isDead = true;
-        StopMove();
+        _isMoving = false;
         if (agent != null)
             Destroy(agent);   
         //agent.enabled = false;
@@ -115,6 +110,18 @@ public class Zombie : HealthComponent, IMovable
            base.DoDamage(contact, damage);
            base.DoKick(-0.01f * contact.Impulse, null);
         }
+    }
+
+    protected override void OnDeath()
+    {
+        StartCoroutine(ZombieDie());
+        _animator.SetTrigger("Death");
+    }
+
+    protected override void OnHeadshot()
+    {
+        StartCoroutine(ZombieDie());
+        _animator.SetTrigger("Headshot");
     }
 
     protected override void onPunch()
@@ -151,10 +158,6 @@ public class Zombie : HealthComponent, IMovable
 
     protected override void OnDamage()
     {
-        if (CurrentHP == 0 && !isDead)
-        {
-            StartCoroutine(ZombieDie());
-        }
     }
 
     protected override void OnKick(Vector3 force, Action callback)

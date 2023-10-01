@@ -19,9 +19,9 @@ namespace Controller.Player
                 var point = enemy.Value.transform.position;
                 var data = new DamageData
                 {
-                    HitPoint = new Vector3(point.x,enemy.Value.Height,point.z),
+                    HitPoint = new Vector3(point.x,enemy.Value.Height/2f,point.z),
                     Target = enemy.Value.gameObject,
-                    Impulse = Vector3.forward,
+                    Impulse = enemy.Value.toppleForce * Vector3.one,
                     SourceID = Id
                 };
                 if (health != null && health.OwnerType == _target)

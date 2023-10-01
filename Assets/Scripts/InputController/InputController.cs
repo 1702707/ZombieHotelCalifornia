@@ -19,7 +19,7 @@ public class InputController : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     private bool _forceMeasure;
     private List<Image> _uiParts;
 
-    private void Start()
+    private void Awake()
     {
         if (_forceUI != null)
         {

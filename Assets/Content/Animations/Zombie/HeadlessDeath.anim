@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Death
+  m_Name: HeadlessDeath
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,9 +21,9 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 21300000, guid: fd027193cd2a1584396715399694da73, type: 3}
+      value: {fileID: 21300000, guid: 26daaee6ae0494b8684473e529511101, type: 3}
     - time: 1
-      value: {fileID: 21300000, guid: d9fde5b82593f4e66b4aec9a68684a44, type: 3}
+      value: {fileID: 21300000, guid: ccfc5b6470a7f475c9c3176fbf19f8c9, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -46,8 +46,8 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: fd027193cd2a1584396715399694da73, type: 3}
-    - {fileID: 21300000, guid: d9fde5b82593f4e66b4aec9a68684a44, type: 3}
+    - {fileID: 21300000, guid: 26daaee6ae0494b8684473e529511101, type: 3}
+    - {fileID: 21300000, guid: ccfc5b6470a7f475c9c3176fbf19f8c9, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

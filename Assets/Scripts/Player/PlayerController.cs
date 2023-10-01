@@ -62,13 +62,18 @@ public class PlayerController : HealthComponent
 
     protected override void OnDamage()
     {
-        if (CurrentHP == 0)
-        {
-            Debug.Log("You LOOSE!");
-        }
     }
 
     protected override void OnKick(Vector3 force, Action callback)
+    {
+    }
+
+    protected override void OnDeath()
+    {
+        Debug.Log("You LOOSE!");
+    }
+
+    protected override void OnHeadshot()
     {
     }
 
