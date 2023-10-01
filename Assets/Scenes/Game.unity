@@ -12670,6 +12670,8 @@ MonoBehaviour:
   _iKickable: 0
   _ownerType: 1
   _headshotEvent: {fileID: 0}
+  _killEnemyEvent: {fileID: 0}
+  _damageEvent: {fileID: 0}
   _headshotEffect: {fileID: 0}
   _height: 0
   _rightArm: {fileID: 846618626}
@@ -13282,6 +13284,8 @@ GameObject:
   - component: {fileID: 1359893314}
   - component: {fileID: 1359893315}
   - component: {fileID: 1359893316}
+  - component: {fileID: 1359893317}
+  - component: {fileID: 1359893318}
   m_Layer: 5
   m_Name: ComboController
   m_TagString: Untagged
@@ -13321,8 +13325,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e3c116c1ab4446b857b983f5362e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _headshotPrefab: {fileID: 1209858328936610294, guid: beffdc1ebe3604842b2698372cbe84fe, type: 3}
-  _headshotDelay: 1
+  _comboData: {fileID: 11400000, guid: 50a1130e27c7b444f863b17c5ebc6cba, type: 2}
+  _comboPrefab: {fileID: 9050441681325289375, guid: beffdc1ebe3604842b2698372cbe84fe, type: 3}
+  _damagePrefab: {fileID: 1118178574302888346, guid: 2f07b6f93a263427aa797f3d13ababbd, type: 3}
+  _comboDelay: 0.5
+  _damageDelay: 0.75
+  _scoreText: {fileID: 2085566632}
 --- !u!114 &1359893316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13343,6 +13351,64 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Controller.Components.ComboController.ComboController,
           Assembly-CSharp
         m_MethodName: OnHeadshot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1359893317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359893313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9aa3dc49a124f35a1c64dc4b54d31d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: c41adbf296c0044acbade630faeec04b, type: 2}
+  onEventTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1359893315}
+        m_TargetAssemblyTypeName: Controller.Components.ComboController.ComboController,
+          Assembly-CSharp
+        m_MethodName: OnKill
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1359893318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359893313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef9a7eeede374391803b59b4b3bd5af7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: c9b101b9fe68f4dc4af9047732a8d006, type: 2}
+  onEventTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1359893315}
+        m_TargetAssemblyTypeName: Controller.Components.ComboController.ComboController,
+          Assembly-CSharp
+        m_MethodName: OnDamage
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

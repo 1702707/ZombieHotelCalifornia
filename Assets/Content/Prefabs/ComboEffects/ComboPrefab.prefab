@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5887051604990070425}
   - component: {fileID: 9050441681325289375}
   m_Layer: 0
-  m_Name: Headshot
+  m_Name: ComboPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

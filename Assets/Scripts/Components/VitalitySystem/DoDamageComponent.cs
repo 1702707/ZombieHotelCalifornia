@@ -18,16 +18,17 @@ namespace Controller.Components.VitalitySystem
         {
             //Debug.Log($" Enter {collision.gameObject.name}");
             HealthComponent health = collision.gameObject.GetComponent<HealthComponent>();
-            var contact = collision.contacts.First();
-            var data = new DamageData
-            {
-                HitPoint = contact.point,
-                Collider = contact.otherCollider.gameObject,
-                Impulse = contact.impulse,
-                ID = Convert.ToInt32(collision.gameObject.name)
-            };
             if (health != null && health.OwnerType == _target)
             {
+                var contact = collision.contacts.First();
+                int.TryParse(gameObject.name.Split('_').Last(), out var id);
+                var data = new DamageData
+                {
+                    HitPoint = contact.point,
+                    Target = contact.otherCollider.gameObject,
+                    Impulse = contact.impulse,
+                    SourceID = id
+                };
                 health.DoDamage(data, _damage);
             }
         }

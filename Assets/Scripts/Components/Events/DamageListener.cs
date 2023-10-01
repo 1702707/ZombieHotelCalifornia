@@ -3,16 +3,16 @@ using UnityEngine.Events;
 
 namespace Controller.Components.Events
 {
-    public class HeadshotListener : MonoBehaviour 
+    public class DamageListener: MonoBehaviour, IListener<DamageData>
     {
-        public HeadshotEvent gameEvent;
+        public DamageEvent gameEvent;
         public UnityEvent<DamageData> onEventTriggered;
 
-        void OnEnable() {
+        public void OnEnable() {
             gameEvent.AddListener(this);
         }
 
-        void OnDisable() {
+        public void OnDisable() {
             gameEvent.RemoveListener(this);
         }
 
