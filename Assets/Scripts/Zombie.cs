@@ -6,13 +6,19 @@ using UnityEngine.AI;
 
 public class Zombie : HealthComponent, IMovable
 {
+    public GameObject wp;
+
+
+
+
+
     [SerializeField] private float despawnTimer;
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private Animator _animator;
     
     private NavMeshAgent agent;
     private Rigidbody rb;
-    private bool reachedWaypoint = false;
+    public bool reachedWaypoint = false;
 
     //Temporary standin for player
     public Vector3 playerPos;
@@ -42,12 +48,12 @@ public class Zombie : HealthComponent, IMovable
         if (!_isMoving)
             return;
         
-        if (agent != null && !isDead)
+        if (agent != null && !isDead && wp != null)
         {
             if (!reachedWaypoint)
             {
                 //When unit reaches initial waypoint, turn and move in a stright line towards the end of the corridor
-                if (agent.remainingDistance <= 0.01)
+                if (Vector3.Distance(new Vector3(transform.position.x,0,transform.position.z),new Vector3(wp.transform.position.x,0,wp.transform.position.z)) < 0.01)
                 {
                     reachedWaypoint = true;
                     agent.SetDestination(new Vector3(12, transform.position.y, transform.position.z));
@@ -77,9 +83,10 @@ public class Zombie : HealthComponent, IMovable
     }
 
     //Set initial waypoint
-    public void SetWaypoint(Vector3 waypoint)
+    public void SetWaypoint(GameObject waypoint)
     {
-        agent.SetDestination(waypoint);
+        agent.SetDestination(waypoint.transform.position);
+        wp = waypoint;
     }
 
     public IEnumerator ZombieDie()
