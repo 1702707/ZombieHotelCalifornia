@@ -21,15 +21,15 @@ namespace Controller.Components.ComboController
 
         private void Awake()
         {
-            _headshotPool = new LinkedPool<GameObject>(CreateHeadshotItem, OnGetHeadshotItem, ReleaseHeadshotItem, null, false, 1);
+            _headshotPool = new LinkedPool<GameObject>(CreateHeadshotItem, OnGetItem, ReleaseItem, null, false, 1);
         }
 
-        private void OnGetHeadshotItem(GameObject obj)
+        private void OnGetItem(GameObject obj)
         {
             obj.SetActive(true);
         }
 
-        private void ReleaseHeadshotItem(GameObject obj)
+        private void ReleaseItem(GameObject obj)
         {
             obj.SetActive(false);
         }
@@ -41,7 +41,6 @@ namespace Controller.Components.ComboController
 
         public void OnHeadshot(ContactPoint contact)
         {
-            Debug.Log("HEADSHOT");
             var effect = _headshotPool.Get();
             effect.transform.position = new Vector3(contact.point.x, contact.point.y + 0.5f, contact.point.z);
             //effect.transform.rotation = Quaternion.FromToRotation(Vector3.left, contact.normal);
