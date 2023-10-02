@@ -22,7 +22,7 @@ namespace Controller.Components.ComboController
         [SerializeField] private float _damageDelay = 0.5f;
 
         [Header("Score")]
-        [SerializeField] private TMP_Text _scoreText;
+        [SerializeField] private ScoreComponent _scoreText;
 
         private int _headshotCount;
         private int _totalKillCount;
@@ -156,7 +156,7 @@ namespace Controller.Components.ComboController
             set
             {
                 _totalScore = value;
-                _scoreText.text = _totalScore.ToString("000000000");
+                _scoreText.SetScore(_totalScore);
             }
         }
 
