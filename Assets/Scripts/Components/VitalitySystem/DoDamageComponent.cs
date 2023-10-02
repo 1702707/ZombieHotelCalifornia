@@ -27,7 +27,8 @@ namespace Controller.Components.VitalitySystem
                     HitPoint = contact.point,
                     Target = contact.otherCollider.gameObject,
                     Impulse = contact.impulse,
-                    SourceID = id
+                    SourceID = id,
+                    Height = health.Height
                 };
                 health.DoDamage(data, _damage);
             }

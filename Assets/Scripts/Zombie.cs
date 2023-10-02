@@ -94,6 +94,7 @@ public class Zombie : HealthComponent, IMovable
         //rb.useGravity = true;
         //rb.isKinematic = false;
         //rb.AddForceAtPosition(new Vector3(-300, 0, 0), new Vector3(0,2,0));
+        rb.Sleep();
 
         yield return new WaitForSeconds(despawnTimer);
 

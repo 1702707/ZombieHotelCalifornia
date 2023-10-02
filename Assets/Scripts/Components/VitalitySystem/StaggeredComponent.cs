@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class StaggeredComponent:MonoBehaviour
 {
+    [SerializeField] private GameObject _staggeredEffect;
+    
     private readonly float _staggeredTime = 2f;
     private IMovable _movable;
     private bool _inProgress;
@@ -16,6 +18,7 @@ public class StaggeredComponent:MonoBehaviour
     {
         _inProgress = false;
         _movable = GetComponent<IMovable>();
+        _staggeredEffect.SetActive(false);
     }
 
     public void Do()
@@ -27,12 +30,13 @@ public class StaggeredComponent:MonoBehaviour
     {
         _inProgress = true;
         _movable.StopMove();
+        _staggeredEffect.SetActive(true);
 
         yield return new WaitForSeconds(_staggeredTime);
 
         _inProgress = false;
         _movable.Move();
-        this.enabled = false;
+        _staggeredEffect.SetActive(false);
     }
 
     public void SetOnHeatAction(Action<Collision> action)

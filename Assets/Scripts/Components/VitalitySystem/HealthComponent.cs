@@ -1,8 +1,6 @@
 using System;
 using Controller.Components.Events;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Controller.Components.VitalitySystem
 {
@@ -13,9 +11,7 @@ namespace Controller.Components.VitalitySystem
         [SerializeField] private EntityType _ownerType;
         [SerializeField] private HeadshotEvent _headshotEvent;
         [SerializeField] private KillEnemyEvent _killEnemyEvent;
-        [SerializeField] private KnockEvent _knockEvent;
         [SerializeField] private DamageEvent _damageEvent;
-        [SerializeField] private ParticleSystem _headshotEffect;
         [SerializeField] private float _height;
         public float toppleForce;
 
@@ -50,21 +46,17 @@ namespace Controller.Components.VitalitySystem
 
                 if (_ownerType == EntityType.Enemy)
                 {
-                    _damageEvent.TriggerEvent(contact);
-                    contact.HitPoint.y = _height;
-                    
+                    _damageEvent?.TriggerEvent(contact);
+
                     if (contact.Target.tag == "Head")
                     {
-                        if(_headshotEffect != null) 
-                            _headshotEffect?.Play();
-                        
-                        _headshotEvent.TriggerEvent(contact);
+                        _headshotEvent?.TriggerEvent(contact);
                         _currentHp = 0;
                         OnHeadshot();
                     }
                     else if (_currentHp <= 0)
                     {
-                        _killEnemyEvent.TriggerEvent(contact);
+                        _killEnemyEvent?.TriggerEvent(contact);
                         OnDeath();
                     }
                 }
