@@ -44,22 +44,31 @@ namespace Controller.Components.VitalitySystem
             {
                 _currentHp = Mathf.Clamp(_currentHp - damage, 0, _maxHealth);
 
-                if (_ownerType == EntityType.Enemy)
+                switch (_ownerType)
                 {
-                    _damageEvent?.TriggerEvent(contact);
-
-                    if (contact.Target.tag == "Head")
-                    {
-                        _headshotEvent?.TriggerEvent(contact);
-                        _currentHp = 0;
-                        OnHeadshot();
-                    }
-                    else if (_currentHp <= 0)
-                    {
-                        _killEnemyEvent?.TriggerEvent(contact);
-                        OnDeath();
-                    }
+                    case EntityType.Enemy:
+                        _damageEvent?.TriggerEvent(contact);
+                        if (contact.Target.tag == "Head")
+                        {
+                            _headshotEvent?.TriggerEvent(contact);
+                            _currentHp = 0;
+                            OnHeadshot();
+                        }
+                        else if (_currentHp <= 0)
+                        {
+                            _killEnemyEvent?.TriggerEvent(contact);
+                        }
+                        break;
+                    case EntityType.Player:
+                        Debug.Log($"PLAYER HP{_currentHp}");
+                        break;
                 }
+
+                if (_currentHp <= 0)
+                {
+                    OnDeath();
+                }
+                
                 OnDamage();
             }
         }

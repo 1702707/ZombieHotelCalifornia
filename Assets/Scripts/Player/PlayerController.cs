@@ -4,6 +4,7 @@ using Controller.Components.ComboController;
 using Controller.Components.VitalitySystem;
 using Controller.Player;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : HealthComponent
 {
@@ -70,7 +71,8 @@ public class PlayerController : HealthComponent
 
     protected override void OnDeath()
     {
-        Debug.Log("You LOOSE!");
+        Debug.Log("You LOSE!");
+        SceneManager.LoadScene("Lose");
     }
 
     protected override void OnHeadshot()

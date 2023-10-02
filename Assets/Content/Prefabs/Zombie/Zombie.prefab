@@ -5042,7 +5042,6 @@ MonoBehaviour:
   despawnTimer: 2
   _rigidbody: {fileID: 5768735390109736519}
   _animator: {fileID: 3796815596154363905}
-  _collider: {fileID: 7759898307528397118}
   reachedWaypoint: 0
   playerPos: {x: 14.25, y: 0, z: 0}
   alive: 1
@@ -5066,7 +5065,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.5, z: 0.2}
+  m_Size: {x: 0.5, y: 1.5, z: 0.2}
   m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!54 &5768735390109736519
 Rigidbody:

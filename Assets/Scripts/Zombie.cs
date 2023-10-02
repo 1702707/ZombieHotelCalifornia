@@ -11,8 +11,7 @@ public class Zombie : HealthComponent, IMovable
     [SerializeField] private float despawnTimer;
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private Animator _animator;
-    [SerializeField] private BoxCollider _collider;
-    
+
     private NavMeshAgent agent;
     public bool reachedWaypoint = false;
 
@@ -87,18 +86,13 @@ public class Zombie : HealthComponent, IMovable
     {
         isDead = true;
         _isMoving = false;
-        // agent.enabled = false;
-        // _rigidbody.Sleep();
-        // _collider.isTrigger = true;
-        if (agent != null)
-            Destroy(agent);   
-        //agent.enabled = false;
-        //rb.useGravity = true;
-        //rb.isKinematic = false;
-        //rb.AddForceAtPosition(new Vector3(-300, 0, 0), new Vector3(0,2,0));
+        agent.isStopped = true;
+        foreach (var component in this.GetComponents<Collider>())
+        {
+            component.isTrigger = true;
+        }
 
         yield return new WaitForSeconds(despawnTimer);
-
         Destroy(this.gameObject);
     }
 
