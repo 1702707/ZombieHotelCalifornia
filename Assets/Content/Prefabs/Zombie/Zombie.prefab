@@ -5035,15 +5035,14 @@ MonoBehaviour:
   _ownerType: 0
   _headshotEvent: {fileID: 11400000, guid: c8d220bc44cbe4cec8fd6d93deeb6028, type: 2}
   _killEnemyEvent: {fileID: 11400000, guid: c41adbf296c0044acbade630faeec04b, type: 2}
-  _knockEvent: {fileID: 0}
   _damageEvent: {fileID: 11400000, guid: c9b101b9fe68f4dc4af9047732a8d006, type: 2}
-  _headshotEffect: {fileID: 0}
   _height: 2.5
   toppleForce: 15
   wp: {fileID: 0}
   despawnTimer: 2
   _rigidbody: {fileID: 5768735390109736519}
   _animator: {fileID: 3796815596154363905}
+  _collider: {fileID: 7759898307528397118}
   reachedWaypoint: 0
   playerPos: {x: 14.25, y: 0, z: 0}
   alive: 1
@@ -5148,7 +5147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9189772341164042960}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.4, z: 0}
+  m_LocalPosition: {x: 0, y: 1.27, z: 0}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_ConstrainProportionsScale: 1
   m_Children: []

@@ -11,9 +11,9 @@ public class Zombie : HealthComponent, IMovable
     [SerializeField] private float despawnTimer;
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private Animator _animator;
+    [SerializeField] private BoxCollider _collider;
     
     private NavMeshAgent agent;
-    private Rigidbody rb;
     public bool reachedWaypoint = false;
 
     //Temporary standin for player
@@ -28,7 +28,6 @@ public class Zombie : HealthComponent, IMovable
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        rb = GetComponent<Rigidbody>();
         isDead = false;
         ResetHealth();
         Move();
@@ -88,13 +87,15 @@ public class Zombie : HealthComponent, IMovable
     {
         isDead = true;
         _isMoving = false;
+        // agent.enabled = false;
+        // _rigidbody.Sleep();
+        // _collider.isTrigger = true;
         if (agent != null)
             Destroy(agent);   
         //agent.enabled = false;
         //rb.useGravity = true;
         //rb.isKinematic = false;
         //rb.AddForceAtPosition(new Vector3(-300, 0, 0), new Vector3(0,2,0));
-        rb.Sleep();
 
         yield return new WaitForSeconds(despawnTimer);
 
@@ -164,7 +165,7 @@ public class Zombie : HealthComponent, IMovable
     protected override void OnKick(Vector3 force, Action callback)
     {
         // rb.useGravity = true;
-        rb.isKinematic = false;
+        _rigidbody.isKinematic = false;
         _rigidbody.AddForce(force, ForceMode.Impulse);
         StartCoroutine(Delay(0.5f, callback));
     }
@@ -173,7 +174,7 @@ public class Zombie : HealthComponent, IMovable
     {
         yield return new WaitForSeconds(delay);
         // rb.useGravity = false;
-        rb.isKinematic = true;
+        _rigidbody.isKinematic = true;
         callback?.Invoke();
     }
 
