@@ -25,8 +25,8 @@ public class TimerComponent : MonoBehaviour
         _timerText.text = $"{timeSpan.Minutes:D2}:{timeSpan.Seconds:D2}";
     }
 
-    public double GetSessionDuration()
+    public int GetSessionDuration()
     {
-        return _totalSeconds;
+        return Convert.ToInt32(_totalSeconds);
     }
 }

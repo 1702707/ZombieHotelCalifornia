@@ -1945,6 +1945,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 195878038}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &232186257 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2885815761366465609, guid: 2a0579bc7c1e34fbba9266c065563ebf, type: 3}
+  m_PrefabInstance: {fileID: 128213699434820621}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &232320688 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8784198356824101091, guid: 6c11559488c65ed478722458310bbcc3, type: 3}
@@ -12246,6 +12257,7 @@ GameObject:
   - component: {fileID: 1359893318}
   - component: {fileID: 1359893317}
   - component: {fileID: 1359893319}
+  - component: {fileID: 1359893320}
   m_Layer: 5
   m_Name: ComboController
   m_TagString: Untagged
@@ -12291,6 +12303,7 @@ MonoBehaviour:
   _comboDelay: 0.5
   _damageDelay: 0.75
   _scoreText: {fileID: 1457694478}
+  _highScoreText: {fileID: 232186257}
 --- !u!114 &1359893316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12398,6 +12411,35 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Controller.Components.ComboController.ComboController,
           Assembly-CSharp
         m_MethodName: OnKnock
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1359893320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359893313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e237bef4dbcd437c9c27c841b6bf2217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 542620ffb2b8d41b5a63ae4ba709c978, type: 2}
+  onEventTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1359893315}
+        m_TargetAssemblyTypeName: Controller.Components.ComboController.ComboController,
+          Assembly-CSharp
+        m_MethodName: OnGameOver
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -43157,6 +43199,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TopPannel
       objectReference: {fileID: 0}
+    - target: {fileID: 5897061754852006657, guid: 2a0579bc7c1e34fbba9266c065563ebf, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294769381
+      objectReference: {fileID: 0}
     - target: {fileID: 6917319111018636120, guid: 2a0579bc7c1e34fbba9266c065563ebf, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -46852,6 +46898,10 @@ PrefabInstance:
       propertyPath: _animator
       value: 
       objectReference: {fileID: 448132100}
+    - target: {fileID: 1424533953089866739, guid: 7578023cd4a204bd8a97d94bb38f08dd, type: 3}
+      propertyPath: _killEnemyEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 542620ffb2b8d41b5a63ae4ba709c978, type: 2}
     - target: {fileID: 5252442596251017137, guid: 7578023cd4a204bd8a97d94bb38f08dd, type: 3}
       propertyPath: m_Extents.x
       value: 0.3

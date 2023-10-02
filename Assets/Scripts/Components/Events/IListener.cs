@@ -6,4 +6,11 @@ namespace Controller.Components.Events
         void OnDisable();
         void OnEventTriggered(T contactPoint);
     }
+    
+    public interface IListener
+    {
+        void OnEnable();
+        void OnDisable();
+        void OnEventTriggered();
+    }
 }

@@ -5,6 +5,7 @@ using Controller.Components.ScriptableObjects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.Serialization;
 
 namespace Controller.Components.ComboController
 {
@@ -21,9 +22,14 @@ namespace Controller.Components.ComboController
         [SerializeField] private float _comboDelay = 0.5f;
         [SerializeField] private float _damageDelay = 0.5f;
 
+        [FormerlySerializedAs("_scoreText")]
         [Header("Score")]
-        [SerializeField] private ScoreComponent _scoreText;
+        [SerializeField] private ScoreComponent _scoreComponent;
+        [SerializeField] private TimerComponent _timerComponent;
+        [SerializeField] private TMP_Text _highScoreText;
 
+        private const string Highscore = "HighScore";
+        
         private int _headshotCount;
         private int _totalKillCount;
         private int _totalScore;
@@ -32,11 +38,14 @@ namespace Controller.Components.ComboController
         private IObjectPool<Transform> _damagePool;
 
         private Dictionary<int, int> _comboCounter = new Dictionary<int, int>();
+        private int _highScore;
 
         private void Awake()
         {
             _itemPool = new LinkedPool<SpriteRenderer>(()=>CreateItem(_comboPrefab), OnGetItem, ReleaseItem, null, false, 20);
             _damagePool = new LinkedPool<Transform>(() => CreateItem(_damagePrefab), OnGetItem, ReleaseItem, null, false, 20);
+            _highScore = PlayerPrefs.GetInt(Highscore);
+            _highScoreText.text = _highScore.ToString("000000000");
         }
 
         private T CreateItem<T>(T prefab) where T:Component
@@ -137,6 +146,16 @@ namespace Controller.Components.ComboController
             Score += combo.Score;
         }
 
+        public void OnGameOver(DamageData data)
+        {
+            if (Score > _highScore)
+            {
+                PlayerPrefs.SetInt(Highscore, Score);
+                PlayerPrefs.SetInt("Time", _timerComponent.GetSessionDuration());
+            }
+                
+        }
+
         private int IncreaseCounter(int id)
         {
             if (_comboCounter.ContainsKey(id))
@@ -156,7 +175,7 @@ namespace Controller.Components.ComboController
             set
             {
                 _totalScore = value;
-                _scoreText.SetScore(_totalScore);
+                _scoreComponent.SetScore(_totalScore);
             }
         }
 
