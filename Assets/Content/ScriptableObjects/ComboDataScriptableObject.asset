@@ -16,28 +16,28 @@ MonoBehaviour:
   _comboDatas:
   - Type: 0
     Sprite: {fileID: 21300000, guid: d5fcbd047a20abc48bc9a4a42f24e19a, type: 3}
-    Score: 10
+    Score: 50
   - Type: 1
     Sprite: {fileID: 0}
-    Score: 1
+    Score: 100
   - Type: 2
     Sprite: {fileID: 21300000, guid: 489f55d07a43e7146ae9153385efc060, type: 3}
-    Score: 2
+    Score: 20
   - Type: 3
     Sprite: {fileID: 21300000, guid: 8d0164528cf0557499df2da928993ff7, type: 3}
-    Score: 3
+    Score: 300
   - Type: 4
     Sprite: {fileID: 21300000, guid: 04d4bcf3c9a5e6b4aab9bd22f1e27f52, type: 3}
-    Score: 4
+    Score: 4000
   - Type: 5
     Sprite: {fileID: 21300000, guid: 6cc24305bf9d41846a677e87a1de6bc3, type: 3}
-    Score: 5
+    Score: 5000
   - Type: 6
     Sprite: {fileID: 21300000, guid: 15569d5645ae29043acd9e9618aabb16, type: 3}
-    Score: 6
+    Score: 6000
   - Type: 7
     Sprite: {fileID: 21300000, guid: 4b45b3169e577fd408f38f5023e3bf9d, type: 3}
-    Score: 10
+    Score: 1000
   - Type: 8
     Sprite: {fileID: 21300000, guid: 6fb1bbb2a22d65b46a90b44ac19ebd31, type: 3}
     Score: 0
