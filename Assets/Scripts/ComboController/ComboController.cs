@@ -29,6 +29,8 @@ namespace Controller.Components.ComboController
         [SerializeField] private TMP_Text _highScoreText;
 
         private const string Highscore = "HighScore";
+        private const string Time = "Time";
+        private const string LastScore = "PreviousScore";
         
         private int _headshotCount;
         private int _totalKillCount;
@@ -151,9 +153,9 @@ namespace Controller.Components.ComboController
             if (Score > _highScore)
             {
                 PlayerPrefs.SetInt(Highscore, Score);
-                PlayerPrefs.SetInt("Time", _timerComponent.GetSessionDuration());
+                PlayerPrefs.SetInt(Time, _timerComponent.GetSessionDuration());
             }
-                
+            PlayerPrefs.SetInt(LastScore, Score);
         }
 
         private int IncreaseCounter(int id)
