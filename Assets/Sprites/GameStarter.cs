@@ -8,6 +8,5 @@ public class GameStarter : MonoBehaviour
     public void OnPlayClick()
     {
         SceneManager.LoadScene("Game");
-        SceneManager.UnloadSceneAsync("Menu");
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Controller.Components.Events;
 using Controller.Components.VitalitySystem;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ namespace Controller.Player
         [SerializeField]
         private int _kickForce;
 
+        [SerializeField] private ComboEvent _comboEvent;
+
         public float Delay => _delay;
 
         public void DoPunch(int i)
@@ -21,13 +24,42 @@ namespace Controller.Player
                 var health = pair.Value;
                 if (health.Staggered.InProgress)
                 {
+                    var pos = health.transform.position;
+                    var data = new DamageData
+                    {
+                        Type = ComboType.Knock,
+                        HitPoint = new Vector3(pos.x, health.Height / 2f, pos.z),
+                        Height = health.Height,
+                        Target = health.gameObject,
+                        Impulse = _kickForce * Vector3.left,
+                        SourceID = 0
+                    };
+                    var count = 0;
                     health.Staggered.SetOnHeatAction((collision)=>
                     {
                         var otherHealth = collision.gameObject.GetComponent<HealthComponent>();
-                        otherHealth.DoKick(_kickForce * Vector3.left, null);
+                        var otherPos = otherHealth.transform.position;
+                        var otherData = new DamageData
+                        {
+                            Type = ComboType.None,
+                            HitPoint = new Vector3(otherPos.x, otherHealth.Height / 2f, otherPos.z),
+                            Height = otherHealth.Height,
+                            Target = otherHealth.gameObject,
+                            Impulse = _kickForce * Vector3.left,
+                            SourceID = 0
+                        };
+                        otherHealth.DoKick(otherData, null);
                         otherHealth.DoPunch();
+                        count++;
                     });
-                    health.DoKick(_kickForce * Vector3.left, null);
+                    health.DoKick(data, () =>
+                    {
+                        if (count > 0)
+                        {
+                            data.Type = ComboType.Collateral;
+                            health.DoDamage(data, Int32.MaxValue);
+                        }
+                    });
                 }
                 else
                 {

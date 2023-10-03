@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace Controller.Components.Events
 {
-    public class BaseDamageDataListener<T>:MonoBehaviour,IListener<DamageData> where T:BaseDamageDataEvent
+    public class BaseComboListener<T>:MonoBehaviour,IListener<DamageData> where T:BaseComboEvent
     {
         public T gameEvent;
         public UnityEvent<DamageData> onEventTriggered;

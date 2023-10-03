@@ -13,39 +13,39 @@ public class PlayerController : HealthComponent
     [SerializeField] private KickTriggerZoneComponent _rightLeg;
     [SerializeField] private KickTriggerZoneComponent _leftLeg;
     [SerializeField] private Animator _animator;
-    
+
     private float _currentDelay;
     private double _expDelaySeconds;
     private int _actionId;
 
 
-    void Update()
+    private void Update()
     {
         var now = new TimeSpan(DateTime.Now.Ticks).TotalSeconds;
-        if(now < _expDelaySeconds)
+        if (now < _expDelaySeconds)
             return;
-            
+
         if (Input.GetButtonUp("LeftPunch"))
         {
             _expDelaySeconds = now + _leftArm.Delay;
             _animator.SetTrigger("LeftPunch");
             StartCoroutine(DoActionWithDelay(_leftArm.Delay, _leftArm.DoPunch));
         }
-        
+
         if (Input.GetButtonUp("RightPunch"))
         {
             _expDelaySeconds = now + _rightArm.Delay;
             _animator.SetTrigger("RightPunch");
             StartCoroutine(DoActionWithDelay(_rightArm.Delay, _rightArm.DoPunch));
         }
-        
+
         if (Input.GetButtonUp("LeftKick"))
         {
-            _expDelaySeconds = now+ _leftLeg.Delay;
+            _expDelaySeconds = now + _leftLeg.Delay;
             _animator.SetTrigger("LeftKick");
             StartCoroutine(DoActionWithDelay(_leftLeg.Delay, _leftLeg.DoKick));
         }
-        
+
         if (Input.GetButtonUp("RightKick"))
         {
             _expDelaySeconds = now + _rightLeg.Delay;
@@ -71,8 +71,6 @@ public class PlayerController : HealthComponent
 
     protected override void OnDeath()
     {
-        Debug.Log("You LOSE!");
-        SceneManager.LoadScene("Lose");
     }
 
     protected override void OnHeadshot()

@@ -5,6 +5,7 @@ using Controller.Components.ScriptableObjects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 namespace Controller.Components.ComboController
@@ -28,9 +29,10 @@ namespace Controller.Components.ComboController
         [SerializeField] private TimerComponent _timerComponent;
         [SerializeField] private TMP_Text _highScoreText;
 
-        private const string Highscore = "HighScore";
+        private const string HighScore = "HighScore";
         private const string Time = "Time";
-        private const string LastScore = "PreviousScore";
+        private const string LastScore = "LastScore";
+        private const string LastTime = "LastTime";
         
         private int _headshotCount;
         private int _totalKillCount;
@@ -46,7 +48,7 @@ namespace Controller.Components.ComboController
         {
             _itemPool = new LinkedPool<SpriteRenderer>(()=>CreateItem(_comboPrefab), OnGetItem, ReleaseItem, null, false, 20);
             _damagePool = new LinkedPool<Transform>(() => CreateItem(_damagePrefab), OnGetItem, ReleaseItem, null, false, 20);
-            _highScore = PlayerPrefs.GetInt(Highscore);
+            _highScore = PlayerPrefs.GetInt(HighScore);
             _highScoreText.text = _highScore.ToString("000000000");
         }
 
@@ -63,6 +65,41 @@ namespace Controller.Components.ComboController
         private void ReleaseItem<T>(T obj) where T: Component
         {
             obj.gameObject.SetActive(false);
+        }
+
+        public void OnCombo(DamageData contact)
+        {
+            switch (contact.Type)
+            {
+                case ComboType.None:
+                    break;
+                case ComboType.Headshot:
+                    OnHeadshot(contact);
+                    break;
+                case ComboType.Kill:
+                case ComboType.DoubleKill:
+                case ComboType.TripleKill:
+                case ComboType.QuadroKill:
+                case ComboType.MegaKill:
+                    OnKill(contact);
+                    break;
+                case ComboType.Damage:
+                    OnDamage(contact);
+                    break;
+                case ComboType.Stagger:
+                    var score = _comboData.GetData(ComboType.Stagger);
+                    Score += score.Score;
+                    break;
+                case ComboType.Knock:
+                case ComboType.Launch:
+                case ComboType.Collateral:
+                case ComboType.Smash:
+                    OnActionEffect(contact);
+                    break;
+                case ComboType.Lose:
+                    OnGameOver(contact);
+                    break;
+            }
         }
 
         public void OnHeadshot(DamageData contact)
@@ -122,16 +159,15 @@ namespace Controller.Components.ComboController
             _totalKillCount++; 
         }
         
-        public void OnKnock(DamageData data)
+        public void OnActionEffect(DamageData data)
         {
-            var combo = _comboData.GetData(ComboType.Knock);
+            var combo = _comboData.GetData(data.Type);
 
             if (combo == null)
             {
                 Debug.LogError($"CAUTION! Combo == null type - Knock");
                 return;
             }
-            
             
             SpriteRenderer effect = _itemPool.Get();
             if (effect != null)
@@ -150,12 +186,9 @@ namespace Controller.Components.ComboController
 
         public void OnGameOver(DamageData data)
         {
-            if (Score > _highScore)
-            {
-                PlayerPrefs.SetInt(Highscore, Score);
-                PlayerPrefs.SetInt(Time, _timerComponent.GetSessionDuration());
-            }
             PlayerPrefs.SetInt(LastScore, Score);
+            PlayerPrefs.SetInt(LastScore, _timerComponent.GetSessionDuration());
+            SceneManager.LoadScene("Lose");
         }
 
         private int IncreaseCounter(int id)
@@ -200,16 +233,21 @@ public class ComboData
 [Serializable]
 public enum ComboType
 {
-    Headshot = 0,
-    Kill = 1,
-    DoubleKill = 2,
-    TriplrKill = 3,
-    QuadroKill = 4,
+    None,
+    Headshot,
+    Kill,
+    DoubleKill,
+    TripleKill,
+    QuadroKill,
     PentaKill = 5,
     MegaKill,
-    Strike,
+    Damage,
     Stagger,
-    Knock
+    Knock,
+    Launch,
+    Collateral,
+    Smash,
+    Lose
 }
 
 public static class ComboTypeEx
@@ -218,12 +256,14 @@ public static class ComboTypeEx
     {
         switch (count)
         {
+            case 0:
+                return ComboType.None;
             case 1:
                 return ComboType.Kill;
             case 2:
                 return ComboType.DoubleKill;
             case 3:
-                return ComboType.TriplrKill;
+                return ComboType.TripleKill;
             case 4:
                 return ComboType.QuadroKill;
             case 5:

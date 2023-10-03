@@ -104,7 +104,11 @@ public class Zombie : HealthComponent, IMovable
         if (contact.Impulse.magnitude > toppleForce)
         {
            base.DoDamage(contact, damage);
-           base.DoKick(-0.01f * contact.Impulse, null);
+           base.DoKick(new DamageData()
+           {
+               Type = ComboType.None,
+               Impulse = -0.01f * contact.Impulse
+           }, null);
         }
     }
 

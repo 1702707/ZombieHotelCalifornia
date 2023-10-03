@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Controller.Components.Events
 {
-    public class BaseDamageDataEvent: ScriptableObject
+    public class BaseComboEvent: ScriptableObject
     {
         List<IListener<DamageData>> listeners = new List<IListener<DamageData>>();
 

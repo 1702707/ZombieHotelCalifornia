@@ -5033,9 +5033,7 @@ MonoBehaviour:
   _maxHealth: 1
   _iKickable: 1
   _ownerType: 0
-  _headshotEvent: {fileID: 11400000, guid: c8d220bc44cbe4cec8fd6d93deeb6028, type: 2}
-  _killEnemyEvent: {fileID: 11400000, guid: c41adbf296c0044acbade630faeec04b, type: 2}
-  _damageEvent: {fileID: 11400000, guid: c9b101b9fe68f4dc4af9047732a8d006, type: 2}
+  _comboEvent: {fileID: 11400000, guid: c9b101b9fe68f4dc4af9047732a8d006, type: 2}
   _height: 2.5
   toppleForce: 15
   wp: {fileID: 0}
