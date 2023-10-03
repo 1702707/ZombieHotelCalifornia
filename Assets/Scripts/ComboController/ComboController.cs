@@ -247,7 +247,7 @@ public enum ComboType
     DoubleKill,
     TripleKill,
     QuadroKill,
-    PentaKill = 5,
+    PentaKill,
     MegaKill,
     Damage,
     Stagger,
