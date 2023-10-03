@@ -79,7 +79,7 @@ namespace Controller.Components.ComboController
                 case ComboType.Kill:
                 case ComboType.DoubleKill:
                 case ComboType.TripleKill:
-                case ComboType.QuadroKill:
+                case ComboType.QuadraKill:
                 case ComboType.MegaKill:
                     OnKill(contact);
                     break;
@@ -246,7 +246,7 @@ public enum ComboType
     Kill,
     DoubleKill,
     TripleKill,
-    QuadroKill,
+    QuadraKill,
     PentaKill,
     MegaKill,
     Damage,
@@ -273,7 +273,7 @@ public static class ComboTypeEx
             case 3:
                 return ComboType.TripleKill;
             case 4:
-                return ComboType.QuadroKill;
+                return ComboType.QuadraKill;
             case 5:
                 return ComboType.PentaKill;
             default:
