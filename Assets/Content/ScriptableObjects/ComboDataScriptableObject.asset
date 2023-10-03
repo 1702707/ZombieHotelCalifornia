@@ -17,42 +17,56 @@ MonoBehaviour:
   - Type: 0
     Sprite: {fileID: 0}
     Score: 0
+    DamageAudio: {fileID: 0}
   - Type: 1
     Sprite: {fileID: 21300000, guid: d5fcbd047a20abc48bc9a4a42f24e19a, type: 3}
     Score: 500
+    DamageAudio: {fileID: 0}
   - Type: 2
     Sprite: {fileID: 0}
     Score: 100
+    DamageAudio: {fileID: 0}
   - Type: 3
     Sprite: {fileID: 21300000, guid: 489f55d07a43e7146ae9153385efc060, type: 3}
     Score: 200
+    DamageAudio: {fileID: 0}
   - Type: 4
     Sprite: {fileID: 21300000, guid: 8d0164528cf0557499df2da928993ff7, type: 3}
     Score: 300
+    DamageAudio: {fileID: 0}
   - Type: 5
     Sprite: {fileID: 21300000, guid: 04d4bcf3c9a5e6b4aab9bd22f1e27f52, type: 3}
     Score: 4000
+    DamageAudio: {fileID: 0}
   - Type: 5
     Sprite: {fileID: 21300000, guid: 6cc24305bf9d41846a677e87a1de6bc3, type: 3}
     Score: 5000
+    DamageAudio: {fileID: 0}
   - Type: 5
     Sprite: {fileID: 21300000, guid: 15569d5645ae29043acd9e9618aabb16, type: 3}
     Score: 6000
+    DamageAudio: {fileID: 0}
   - Type: 7
     Sprite: {fileID: 0}
     Score: 50
+    DamageAudio: {fileID: 0}
   - Type: 8
     Sprite: {fileID: 21300000, guid: cd37cb5731ca1f9458d3eae07a0f967e, type: 3}
     Score: 100
+    DamageAudio: {fileID: 0}
   - Type: 10
     Sprite: {fileID: 21300000, guid: 861eca1c89265f94493ce4f77e477b71, type: 3}
     Score: 150
+    DamageAudio: {fileID: 0}
   - Type: 11
     Sprite: {fileID: 21300000, guid: 4b45b3169e577fd408f38f5023e3bf9d, type: 3}
     Score: 500
+    DamageAudio: {fileID: 0}
   - Type: 12
     Sprite: {fileID: 0}
     Score: 0
+    DamageAudio: {fileID: 0}
   - Type: 12
     Sprite: {fileID: 0}
     Score: 0
+    DamageAudio: {fileID: 0}

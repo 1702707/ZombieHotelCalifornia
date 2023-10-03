@@ -154,7 +154,10 @@ namespace Controller.Components.ComboController
                    Debug.LogError("CAUTION! Effect = null");
                }
             }
-            
+            if(combo.DamageAudio != null)
+            {
+                AudioManager.Instance.PlaySound(combo.DamageAudio);
+            }
             Score += combo.Score;
             _totalKillCount++; 
         }
@@ -228,6 +231,7 @@ public class ComboData
     public ComboType Type;
     public Sprite Sprite;
     public int Score;
+    public AudioClip DamageAudio;
 }
 
 [Serializable]

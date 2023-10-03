@@ -18,6 +18,8 @@ public class PlayerController : HealthComponent
     private double _expDelaySeconds;
     private int _actionId;
 
+    [SerializeField] private AudioClip punchAudio;
+    [SerializeField] private AudioClip kickAudio;
 
     private void Update()
     {
@@ -29,35 +31,39 @@ public class PlayerController : HealthComponent
         {
             _expDelaySeconds = now + _leftArm.Delay;
             _animator.SetTrigger("LeftPunch");
-            StartCoroutine(DoActionWithDelay(_leftArm.Delay, _leftArm.DoPunch));
+            StartCoroutine(DoActionWithDelay(_leftArm.Delay, _leftArm.DoPunch,punchAudio));
         }
 
         if (Input.GetButtonUp("RightPunch"))
         {
             _expDelaySeconds = now + _rightArm.Delay;
             _animator.SetTrigger("RightPunch");
-            StartCoroutine(DoActionWithDelay(_rightArm.Delay, _rightArm.DoPunch));
+            StartCoroutine(DoActionWithDelay(_rightArm.Delay, _rightArm.DoPunch, punchAudio));
         }
 
         if (Input.GetButtonUp("LeftKick"))
         {
             _expDelaySeconds = now + _leftLeg.Delay;
             _animator.SetTrigger("LeftKick");
-            StartCoroutine(DoActionWithDelay(_leftLeg.Delay, _leftLeg.DoKick));
+            StartCoroutine(DoActionWithDelay(_leftLeg.Delay, _leftLeg.DoKick, kickAudio));
         }
 
         if (Input.GetButtonUp("RightKick"))
         {
             _expDelaySeconds = now + _rightLeg.Delay;
             _animator.SetTrigger("RightKick");
-            StartCoroutine(DoActionWithDelay(_rightLeg.Delay, _rightLeg.DoKick));
+            StartCoroutine(DoActionWithDelay(_rightLeg.Delay, _rightLeg.DoKick, kickAudio));
         }
     }
 
-    private IEnumerator DoActionWithDelay(float delay, Action<int> doPunch)
+    private IEnumerator DoActionWithDelay(float delay, Action<int> doPunch, AudioClip clip)
     {
         yield return new WaitForSeconds(delay);
         _actionId = IDGenerator.Get();
+        if(clip != null ) 
+        {
+            AudioManager.Instance.PlaySound(clip);
+        }
         doPunch.Invoke(_actionId);
     }
 

@@ -23,6 +23,10 @@ public class Zombie : HealthComponent, IMovable
 
     private bool _isMoving;
 
+    [SerializeField] private AudioClip zombieDeathAudio;
+    [SerializeField] private AudioClip zombieHeadShotAudio;
+    [SerializeField] private AudioClip zombieStunnedAudio;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -70,7 +74,7 @@ public class Zombie : HealthComponent, IMovable
         }
         if(alive == false)
         {
-            StartCoroutine(ZombieDie());
+            StartCoroutine(ZombieDie(0));
             alive = true;
         }
     }
@@ -82,7 +86,7 @@ public class Zombie : HealthComponent, IMovable
         wp = waypoint;
     }
 
-    public IEnumerator ZombieDie()
+    public IEnumerator ZombieDie(int DeathType)
     {
         isDead = true;
         _isMoving = false;
@@ -90,6 +94,20 @@ public class Zombie : HealthComponent, IMovable
         foreach (var component in this.GetComponents<Collider>())
         {
             component.isTrigger = true;
+        }
+        if (DeathType == 0)
+        {
+            if (zombieDeathAudio != null)
+            {
+                AudioManager.Instance.PlaySound(zombieDeathAudio);
+            }
+        }
+        else
+        {
+            if (zombieHeadShotAudio != null)
+            {
+                AudioManager.Instance.PlaySound(zombieHeadShotAudio);
+            }
         }
 
         yield return new WaitForSeconds(despawnTimer);
@@ -114,13 +132,13 @@ public class Zombie : HealthComponent, IMovable
 
     protected override void OnDeath()
     {
-        StartCoroutine(ZombieDie());
+        StartCoroutine(ZombieDie(0));
         _animator.SetTrigger("Death");
     }
 
     protected override void OnHeadshot()
     {
-        StartCoroutine(ZombieDie());
+        StartCoroutine(ZombieDie(1));
         _animator.SetTrigger("Headshot");
     }
 
