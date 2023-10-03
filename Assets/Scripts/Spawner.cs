@@ -23,6 +23,8 @@ public class Spawner : MonoBehaviour
     [SerializeField] private Transform[] randomBackLeftSpawnPoints;
     [SerializeField] private Transform[] randomBackRightSpawnPoints;
 
+    [SerializeField] private AudioClip waveSpawnAudio;
+
     // Update is called once per frame
     void Update()
     {
@@ -31,6 +33,10 @@ public class Spawner : MonoBehaviour
         {
             if (waves.Length >= waveIndex + 1)
             {
+                if (waveSpawnAudio != null)
+                {
+                    AudioManager.Instance.PlaySound(waveSpawnAudio);
+                }
                 Countdown = waves[waveIndex].timeToNextWave;
                 waveToSpawn = waves[waveIndex].waveToSpawn;
                 if (waveToSpawn == -1)

@@ -70,6 +70,7 @@ namespace Controller.Components.VitalitySystem
 
         public virtual void DoKick(DamageData data, Action callback)
         {
+            //Kick Audio
             if (_iKickable)
             {
                 _comboEvent.TriggerEvent(data);
@@ -79,6 +80,7 @@ namespace Controller.Components.VitalitySystem
 
         public virtual void DoPunch()
         {
+            //Punch audio
             Staggered.Do();
             _comboEvent.TriggerEvent(new DamageData
             {
