@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Controller.Components.ScriptableObjects;
+using Controller.Leaderboard;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -29,13 +30,6 @@ namespace Controller.Components.ComboController
         [SerializeField] private TimerComponent _timerComponent;
         [SerializeField] private TMP_Text _highScoreText;
 
-        private const string HighScore = "HighScore";
-        private const string Time = "Time";
-        private const string LastScore = "LastScore";
-        private const string LastTime = "LastTime";
-        
-        private int _headshotCount;
-        private int _totalKillCount;
         private int _totalScore;
         
         private IObjectPool<SpriteRenderer> _itemPool;
@@ -48,7 +42,7 @@ namespace Controller.Components.ComboController
         {
             _itemPool = new LinkedPool<SpriteRenderer>(()=>CreateItem(_comboPrefab), OnGetItem, ReleaseItem, null, false, 20);
             _damagePool = new LinkedPool<Transform>(() => CreateItem(_damagePrefab), OnGetItem, ReleaseItem, null, false, 20);
-            _highScore = PlayerPrefs.GetInt(HighScore);
+            _highScore = PlayerPrefs.GetInt("HighScore");
             _highScoreText.text = _highScore.ToString("000000000");
         }
 
@@ -115,7 +109,6 @@ namespace Controller.Components.ComboController
             }
             
             IncreaseCounter(contact.SourceID);
-            _headshotCount++;
             Score += data.Score;
         }
         
@@ -159,7 +152,6 @@ namespace Controller.Components.ComboController
                 AudioManager.Instance.PlaySound(combo.DamageAudio);
             }
             Score += combo.Score;
-            _totalKillCount++; 
         }
         
         public void OnActionEffect(DamageData data)
@@ -189,13 +181,14 @@ namespace Controller.Components.ComboController
 
         public void OnGameOver(DamageData data)
         {
-            PlayerPrefs.SetInt(LastScore, Score);
-            PlayerPrefs.SetInt(LastScore, _timerComponent.GetSessionDuration());
+            var time = _timerComponent.GetSessionDuration();
+            Score += 100 * Mathf.FloorToInt(time/60) + time%60;
+            LeaderBoardController.SaveLastScore(Score);
+            SceneManager.LoadScene("Lose");
             HighScoreEntry newEntry = new HighScoreEntry();
             newEntry.score = Score;
             newEntry.name = "NEW";
             XMLManager.Instance.SaveScores(newEntry);
-            //SceneManager.LoadScene("Lose");
         }
 
         private int IncreaseCounter(int id)
