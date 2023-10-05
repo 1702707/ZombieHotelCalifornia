@@ -191,7 +191,11 @@ namespace Controller.Components.ComboController
         {
             PlayerPrefs.SetInt(LastScore, Score);
             PlayerPrefs.SetInt(LastScore, _timerComponent.GetSessionDuration());
-            SceneManager.LoadScene("Lose");
+            HighScoreEntry newEntry = new HighScoreEntry();
+            newEntry.score = Score;
+            newEntry.name = "NEW";
+            XMLManager.Instance.SaveScores(newEntry);
+            //SceneManager.LoadScene("Lose");
         }
 
         private int IncreaseCounter(int id)

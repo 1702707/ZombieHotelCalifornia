@@ -17,6 +17,7 @@ public class XMLManager : MonoBehaviour
         }
         else
         {
+            Debug.Log("XML");
             Destroy(gameObject);
         }
         /*HighScoreEntry A = new HighScoreEntry();
@@ -82,6 +83,17 @@ public class XMLManager : MonoBehaviour
             leaderboard = serializer.Deserialize(stream) as Leaderboard;
             stream.Close();
 
+        }
+        else
+        {
+            leaderboard.list.Clear();
+            HighScoreEntry A = new HighScoreEntry();
+            A.score = 0;
+            A.name = "AAA";
+            for (int i = 0; i < 5; i++)
+            {
+                leaderboard.list.Add(A);
+            }
         }
         return leaderboard.list;
     }
