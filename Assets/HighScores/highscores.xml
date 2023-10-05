@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<Leaderboard xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <list>
+    <HighScoreEntry>
+      <name>AAA</name>
+      <score>0</score>
+    </HighScoreEntry>
+    <HighScoreEntry>
+      <name>AAA</name>
+      <score>0</score>
+    </HighScoreEntry>
+    <HighScoreEntry>
+      <name>AAA</name>
+      <score>0</score>
+    </HighScoreEntry>
+    <HighScoreEntry>
+      <name>AAA</name>
+      <score>0</score>
+    </HighScoreEntry>
+    <HighScoreEntry>
+      <name>AAA</name>
+      <score>0</score>
+    </HighScoreEntry>
+  </list>
+</Leaderboard>
