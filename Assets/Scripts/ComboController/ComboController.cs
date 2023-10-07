@@ -107,8 +107,7 @@ namespace Controller.Components.ComboController
                 effect.transform.position = new Vector3(contact.HitPoint.x, contact.Height, contact.HitPoint.z);
                 StartCoroutine(ReturnToPoolWithDelay(effect, _itemPool, _comboDelay));
             }
-            
-            IncreaseCounter(contact.SourceID);
+
             Score += data.Score;
         }
         
@@ -182,13 +181,13 @@ namespace Controller.Components.ComboController
         public void OnGameOver(DamageData data)
         {
             var time = _timerComponent.GetSessionDuration();
-            Score += 100 * Mathf.FloorToInt(time/60) + time%60;
-            LeaderBoardController.SaveLastScore(Score);
+            Score += 100 * time.Minutes + time.Seconds;
+            LeaderBoardController.RegisterScore(Score, time);
+            // HighScoreEntry newEntry = new HighScoreEntry();
+            // newEntry.score = Score;
+            // newEntry.name = "NEW";
+            // XMLManager.Instance.SaveScores(newEntry);
             SceneManager.LoadScene("Lose");
-            HighScoreEntry newEntry = new HighScoreEntry();
-            newEntry.score = Score;
-            newEntry.name = "NEW";
-            XMLManager.Instance.SaveScores(newEntry);
         }
 
         private int IncreaseCounter(int id)

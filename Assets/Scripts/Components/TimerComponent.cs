@@ -9,6 +9,7 @@ public class TimerComponent : MonoBehaviour
     private long _startTicks;
     private long _totalTicks;
     private double _totalSeconds;
+    private TimeSpan _timeSpan;
 
     // Start is called before the first frame update
     void Start()
@@ -20,13 +21,13 @@ public class TimerComponent : MonoBehaviour
     void Update()
     {
         _totalTicks = DateTime.Now.Ticks - _startTicks;
-        var timeSpan = new TimeSpan(_totalTicks);
-        _totalSeconds = timeSpan.TotalSeconds;
-        _timerText.text = $"{timeSpan.Minutes:D2}:{timeSpan.Seconds:D2}";
+        _timeSpan = new TimeSpan(_totalTicks);
+        _totalSeconds = _timeSpan.TotalSeconds;
+        _timerText.text = $"{_timeSpan.Minutes:D2}:{_timeSpan.Seconds:D2}";
     }
 
-    public int GetSessionDuration()
+    public TimeSpan GetSessionDuration()
     {
-        return Convert.ToInt32(_totalSeconds);
+        return _timeSpan;
     }
 }

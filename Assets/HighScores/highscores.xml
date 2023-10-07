@@ -2,24 +2,24 @@
 <Leaderboard xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <list>
     <HighScoreEntry>
-      <name>AAA</name>
-      <score>0</score>
+      <name>NEW</name>
+      <score>21426</score>
     </HighScoreEntry>
     <HighScoreEntry>
-      <name>AAA</name>
-      <score>0</score>
+      <name>NEW</name>
+      <score>20538</score>
     </HighScoreEntry>
     <HighScoreEntry>
-      <name>AAA</name>
-      <score>0</score>
+      <name>NEW</name>
+      <score>8528</score>
     </HighScoreEntry>
     <HighScoreEntry>
-      <name>AAA</name>
-      <score>0</score>
+      <name>NEW</name>
+      <score>6653</score>
     </HighScoreEntry>
     <HighScoreEntry>
-      <name>AAA</name>
-      <score>0</score>
+      <name>NEW</name>
+      <score>6305</score>
     </HighScoreEntry>
   </list>
 </Leaderboard>
