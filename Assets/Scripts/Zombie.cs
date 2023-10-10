@@ -183,6 +183,7 @@ public class Zombie : HealthComponent, IMovable
         // rb.useGravity = true;
         _rigidbody.isKinematic = false;
         _rigidbody.AddForce(force, ForceMode.Impulse);
+        _animator.SetTrigger("Knock");
         StartCoroutine(Delay(0.5f, callback));
     }
 
