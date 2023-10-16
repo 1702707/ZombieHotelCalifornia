@@ -198,15 +198,16 @@ public class Zombie : HealthComponent, IMovable
     public void Move()
     {
         _isMoving = true;
-        _animator.enabled = true;
+        _animator.SetTrigger("Move");
+        _animator.speed = 1;
         if(agent != null)
             agent.isStopped = false;
     }
 
     public void StopMove()
     {
-        _isMoving = false;
-        _animator.enabled = false;
+        _isMoving = false; 
+        _animator.speed = 0.5f;
         if(agent!=null)
             agent.isStopped = true;
     }

@@ -10,6 +10,7 @@ namespace Controller.Leaderboard
     public class LeaderBoardController: MonoBehaviour
     {
         private const string FilePath = "Leaderboard.json";
+        private const string HighScoreText = "HightScore";
 
         private static List<LeaderBoardData> _leaderBoardList;
         private static int _lastScore;
@@ -30,14 +31,16 @@ namespace Controller.Leaderboard
             get
             {
                 if (_highScore != default) return _highScore;
-                if(_leaderBoardList is { Count: > 0 })
-                    _leaderBoardList.Max(data => data.Score);
-
+                _highScore = PlayerPrefs.GetInt(HighScoreText);
                 return _highScore;
             }
-            set => _highScore = value;
+            set
+            {
+                _highScore = value;
+                PlayerPrefs.SetInt(HighScoreText, _highScore);
+            }
         }
-        
+
         public static int LastScore => _lastScore;
         public static TimeSpan LastTime => _lastTime;
 
@@ -81,6 +84,8 @@ namespace Controller.Leaderboard
                 try
                 {
                     _leaderBoardList = JsonConvert.DeserializeObject<List<LeaderBoardData>>(json);
+                    _highScore = _leaderBoardList.Max(data => data.Score);
+                    PlayerPrefs.SetInt(HighScoreText, _highScore);
                 }
                 catch
                 {

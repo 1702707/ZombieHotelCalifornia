@@ -42,7 +42,7 @@ namespace Controller.Components.ComboController
         {
             _itemPool = new LinkedPool<SpriteRenderer>(()=>CreateItem(_comboPrefab), OnGetItem, ReleaseItem, null, false, 20);
             _damagePool = new LinkedPool<Transform>(() => CreateItem(_damagePrefab), OnGetItem, ReleaseItem, null, false, 20);
-            _highScore = PlayerPrefs.GetInt("HighScore");
+            _highScore = LeaderBoardController.HighScore;
             _highScoreText.text = _highScore.ToString("000000000");
         }
 
