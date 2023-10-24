@@ -155,6 +155,7 @@ MonoBehaviour:
   _rigidbody: {fileID: 1234557981350075983}
   _collider: {fileID: 7222090159976680314}
   _ballLifetime: 15
+  _ballRenderer: {fileID: 2741005394608066127}
 --- !u!114 &4551354759131461287
 MonoBehaviour:
   m_ObjectHideFlags: 0

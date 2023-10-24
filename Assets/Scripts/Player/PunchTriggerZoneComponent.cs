@@ -13,8 +13,6 @@ namespace Controller.Player
         [SerializeField]
         private int _kickForce;
 
-        [SerializeField] private ComboEvent _comboEvent;
-
         public float Delay => _delay;
 
         public void DoPunch(int i)

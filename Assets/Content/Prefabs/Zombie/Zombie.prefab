@@ -4971,6 +4971,7 @@ GameObject:
   - component: {fileID: 5768735390109736519}
   - component: {fileID: 5495398733866443388}
   - component: {fileID: 7105927582521367951}
+  - component: {fileID: 8572968838948715151}
   m_Layer: 3
   m_Name: Zombie
   m_TagString: Untagged
@@ -5109,6 +5110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 1
   _target: 1
+  _attackAnimator: {fileID: 3796815596154363905}
 --- !u!114 &7105927582521367951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5122,6 +5124,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _staggeredEffect: {fileID: 9189772341164042960}
+--- !u!135 &8572968838948715151
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7576592897217294572}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!1 &9189772341164042960
 GameObject:
   m_ObjectHideFlags: 0

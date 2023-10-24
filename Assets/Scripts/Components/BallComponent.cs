@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Controller.Components
 {
@@ -10,6 +11,7 @@ namespace Controller.Components
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private SphereCollider _collider;
         [SerializeField] private float _ballLifetime;
+        [SerializeField] private MeshRenderer _ballRenderer;
         
         private List<Action> _listeners = new List<Action>();
 
@@ -45,6 +47,13 @@ namespace Controller.Components
         {
             this.gameObject.SetActive(true);
             _collider.isTrigger = true;
+            // var mat = _ballRenderer.material;
+            // mat.color = new Color(
+            //     Random.Range(0, 255), 
+            //     Random.Range(0, 255), 
+            //     Random.Range(0, 255)
+            // );
+            // _ballRenderer.material = mat;
             _rigidbody.WakeUp();
         }
 

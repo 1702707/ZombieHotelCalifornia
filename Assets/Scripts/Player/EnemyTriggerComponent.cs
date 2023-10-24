@@ -31,12 +31,12 @@ namespace Controller.Player
             var collisionPoint = other.ClosestPoint(transform.position);
             var health = other.GetComponent<HealthComponent>();
             if(health != null && health.OwnerType == _target)
-                _enemies[other.GetHashCode()] = health;
+                _enemies[other.gameObject.GetHashCode()] = health;
         }
 
         private void OnTriggerExit(Collider other)
         {
-            var id = other.GetHashCode();
+            var id = other.gameObject.GetHashCode();
             if (_enemies.ContainsKey(id))
                 _enemies.Remove(id);
         }

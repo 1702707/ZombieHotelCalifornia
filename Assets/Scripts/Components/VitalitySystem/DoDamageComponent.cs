@@ -1,17 +1,30 @@
 using System;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Controller.Components.VitalitySystem
 {
+    [RequireComponent(typeof(SphereCollider))]
     public class DoDamageComponent: MonoBehaviour
     {
         [SerializeField] private int _damage;
         [SerializeField] private EntityType _target;
+        [SerializeField] private Animator _attackAnimator;
 
         public int Damage => _damage;
         public EntityType Target => _target;
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(_attackAnimator == null)
+                return;
+            
+            HealthComponent health = other.gameObject.GetComponent<HealthComponent>();
+            if (health != null && health.OwnerType == _target)
+            {
+                _attackAnimator.SetTrigger("Attack");
+            }
+        }
 
 
         private void OnCollisionEnter(Collision collision)
