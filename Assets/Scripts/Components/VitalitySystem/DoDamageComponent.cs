@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Controller.Components.VitalitySystem
@@ -23,6 +24,18 @@ namespace Controller.Components.VitalitySystem
             if (health != null && health.OwnerType == _target)
             {
                 _attackAnimator.SetTrigger("Attack");
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if(_attackAnimator == null)
+                return;
+            
+            HealthComponent health = other.gameObject.GetComponent<HealthComponent>();
+            if (health != null && health.OwnerType == _target)
+            {
+                _attackAnimator.ResetTrigger("Attack");
             }
         }
 
