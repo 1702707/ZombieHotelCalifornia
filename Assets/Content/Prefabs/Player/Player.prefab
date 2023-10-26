@@ -36,8 +36,9 @@ Transform:
   - {fileID: 766398819614425467}
   - {fileID: 2061769437036378139}
   - {fileID: 7744731342930916936}
+  - {fileID: 1692697109019013085}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1424533953089866739
 MonoBehaviour:
@@ -54,9 +55,7 @@ MonoBehaviour:
   _maxHealth: 1
   _iKickable: 0
   _ownerType: 1
-  _headshotEvent: {fileID: 0}
-  _killEnemyEvent: {fileID: 0}
-  _damageEvent: {fileID: 0}
+  _comboEvent: {fileID: 11400000, guid: c9b101b9fe68f4dc4af9047732a8d006, type: 2}
   _height: 0
   toppleForce: 0
   _rightArm: {fileID: 468462229244618039}
@@ -64,6 +63,8 @@ MonoBehaviour:
   _rightLeg: {fileID: 6187298163931203037}
   _leftLeg: {fileID: 3210847069489710990}
   _animator: {fileID: 0}
+  punchAudio: {fileID: 0}
+  kickAudio: {fileID: 0}
 --- !u!136 &8478217491932617911
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -124,12 +125,83 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.5, y: 1, z: 0.5}
+  m_Extents: {x: 0.3, y: 1, z: 0.3}
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 1, z: 0}
   m_TimeToStationary: 0.5
+--- !u!1 &2374834051183977869
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1692697109019013085}
+  - component: {fileID: 8053134559033480590}
+  - component: {fileID: 3837958256131014017}
+  m_Layer: 5
+  m_Name: DangerZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1692697109019013085
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2374834051183977869}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7598664976508197494}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8053134559033480590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2374834051183977869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd7d416a7c3949329edec172a8b0ff46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collider: {fileID: 0}
+  _target: 0
+  _box: {fileID: 0}
+  _dangerZone: {fileID: 0}
+  _player: {fileID: 0}
+--- !u!65 &3837958256131014017
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2374834051183977869}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.5, y: 2, z: 4}
+  m_Center: {x: -1.5, y: 1, z: 0}
 --- !u!1 &3407423725838847529
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +251,7 @@ MonoBehaviour:
   _target: 0
   _kickForce: 10
   _damage: 1
-  _delay: 1
+  _delay: 0.4
   _knockEvent: {fileID: 11400000, guid: b89986687034a471f90aeb8c8a5ec546, type: 2}
 --- !u!65 &6672564514470714699
 BoxCollider:
@@ -200,7 +272,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 1, z: 4}
+  m_Size: {x: 1, y: 1, z: 4}
   m_Center: {x: -1, y: 0.5, z: -2}
 --- !u!1 &4527569341244007211
 GameObject:
@@ -249,8 +321,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collider: {fileID: 5669452979115254772}
   _target: 0
-  _delay: 0.5
-  _kickForce: 5
+  _delay: 0.2
+  _kickForce: 7
 --- !u!65 &5669452979115254772
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -270,7 +342,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 1, z: 4}
+  m_Size: {x: 1, y: 1, z: 4}
   m_Center: {x: -1, y: 1.5, z: -2}
 --- !u!1 &9092344274400172602
 GameObject:
@@ -319,8 +391,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collider: {fileID: 3799561138758177397}
   _target: 0
-  _delay: 0.5
-  _kickForce: 5
+  _delay: 0.2
+  _kickForce: 7
 --- !u!65 &3799561138758177397
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -340,7 +412,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 1, z: 4}
+  m_Size: {x: 1, y: 1, z: 4}
   m_Center: {x: -1, y: 1.5, z: 2}
 --- !u!1 &9138689014565560742
 GameObject:
@@ -391,7 +463,7 @@ MonoBehaviour:
   _target: 0
   _kickForce: 10
   _damage: 1
-  _delay: 1
+  _delay: 0.4
   _knockEvent: {fileID: 11400000, guid: b89986687034a471f90aeb8c8a5ec546, type: 2}
 --- !u!65 &3699462844677619992
 BoxCollider:
@@ -412,5 +484,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 1, z: 4}
+  m_Size: {x: 1, y: 1, z: 4}
   m_Center: {x: -1, y: 0.5, z: 2}

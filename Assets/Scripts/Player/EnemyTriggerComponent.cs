@@ -7,7 +7,6 @@ namespace Controller.Player
 {
     public class EnemyTriggerComponent: MonoBehaviour
     {
-        [SerializeField] private BoxCollider _collider;
         [SerializeField] protected EntityType _target;
 
         protected Dictionary<int, HealthComponent> Enemies
@@ -28,13 +27,12 @@ namespace Controller.Player
 
         private void OnTriggerEnter(Collider other)
         {
-            var collisionPoint = other.ClosestPoint(transform.position);
             var health = other.GetComponent<HealthComponent>();
             if(health != null && health.OwnerType == _target)
                 _enemies[other.gameObject.GetHashCode()] = health;
         }
 
-        private void OnTriggerExit(Collider other)
+        protected void OnTriggerExit(Collider other)
         {
             var id = other.gameObject.GetHashCode();
             if (_enemies.ContainsKey(id))

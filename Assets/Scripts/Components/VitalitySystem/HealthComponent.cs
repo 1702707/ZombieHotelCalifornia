@@ -107,6 +107,8 @@ namespace Controller.Components.VitalitySystem
             }
         }
 
+        public bool IsDead => _currentHp <= 0;
+
         protected abstract void onPunch();
     }
 }

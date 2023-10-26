@@ -4,7 +4,6 @@ using Controller.Components.ComboController;
 using Controller.Components.VitalitySystem;
 using Controller.Player;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : HealthComponent
 {

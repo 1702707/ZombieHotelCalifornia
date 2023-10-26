@@ -197,6 +197,9 @@ public class Zombie : HealthComponent, IMovable
 
     public void Move()
     {
+        if(isDead)
+            return;
+        
         _isMoving = true;
         _animator.SetTrigger("Move");
         _animator.speed = 1;

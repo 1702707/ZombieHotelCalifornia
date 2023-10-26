@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Controller.Components.VitalitySystem
@@ -11,9 +10,15 @@ namespace Controller.Components.VitalitySystem
         [SerializeField] private int _damage;
         [SerializeField] private EntityType _target;
         [SerializeField] private Animator _attackAnimator;
+        private HealthComponent _health;
 
         public int Damage => _damage;
         public EntityType Target => _target;
+
+        private void Awake()
+        {
+            _health = GetComponent<HealthComponent>();
+        }
 
         private void OnTriggerStay(Collider other)
         {
@@ -42,6 +47,8 @@ namespace Controller.Components.VitalitySystem
 
         private void OnCollisionEnter(Collision collision)
         {
+            if(_health != null && (_health.Staggered || _health.IsDead))
+                return;
             //Debug.Log($" Enter {collision.gameObject.name}");
             HealthComponent health = collision.gameObject.GetComponent<HealthComponent>();
             if (health != null && health.OwnerType == _target)
