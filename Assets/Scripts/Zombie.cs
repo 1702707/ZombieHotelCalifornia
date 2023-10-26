@@ -206,7 +206,7 @@ public class Zombie : HealthComponent, IMovable
 
     public void StopMove()
     {
-        _isMoving = false; 
+        _isMoving = false;
         _animator.speed = 0.5f;
         if(agent!=null)
             agent.isStopped = true;

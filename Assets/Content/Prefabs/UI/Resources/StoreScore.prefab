@@ -608,15 +608,15 @@ RectTransform:
   m_GameObject: {fileID: 2442759260698433292}
   m_LocalRotation: {x: -0, y: -0, z: 0.2095464, w: 0.97779876}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.99997014, y: 0.99997014, z: 0.99997014}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8721363291151523030}
+  m_Father: {fileID: 1929196293380098890}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 24.192}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -429, y: -155}
+  m_AnchoredPosition: {x: -429.0128, y: 29.4}
   m_SizeDelta: {x: 472, y: 181.29999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2094856855701444394
@@ -710,7 +710,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -0.000061035156, w: -60.933205}
+  m_margin: {x: 0, y: 0, z: -0.000061035156, w: -5.5832977}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -961,7 +961,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1929196293380098890}
-  - {fileID: 5906627852488670028}
   - {fileID: 5158530259431072365}
   - {fileID: 3652007823388626455}
   - {fileID: 9013121748739840339}
@@ -1305,7 +1304,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.99997014, y: 0.99997014, z: 0.99997014}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5906627852488670028}
   m_Father: {fileID: 8721363291151523030}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

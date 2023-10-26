@@ -46,11 +46,13 @@ public class StaggeredComponent:MonoBehaviour
     
     private void OnCollisionEnter(Collision collision)
     {
-        if (InProgress && _onHitAction != null)
+        Debug.Log($"Staggred {collision.gameObject.name}");
+        if ( _onHitAction != null)
         {
             var health = collision.gameObject.GetComponent<HealthComponent>();
             if (health != null && health.OwnerType == EntityType.Enemy)
             {
+                Debug.Log($"Staggred {gameObject.name} hits {health.gameObject.name}");
                 _onHitAction.Invoke(collision);
                 _onHitAction = null;
             }

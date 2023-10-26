@@ -25,6 +25,7 @@ public class Spawner : MonoBehaviour
 
     [SerializeField] private AudioClip waveSpawnAudio;
 
+    private int index;
     // Update is called once per frame
     void Update()
     {
@@ -77,6 +78,7 @@ public class Spawner : MonoBehaviour
                     if (wave[i].spawnPoint != null)
                     {
                         Zombie temp = Instantiate(prefab, wave[i].spawnPoint.position, new Quaternion(0, 0, 0, 0));
+                        temp.name = ($"Zombie_{index++}").ToString();
                         temp.transform.LookAt(wave[i].waypoint.position);
                         temp.SetWaypoint(wave[i].waypoint.gameObject);
                     }
@@ -98,6 +100,7 @@ public class Spawner : MonoBehaviour
         {
             int randomSpawn = Random.Range(0, spawnPoints.Length);
             Zombie temp = Instantiate(prefab, spawnPoints[randomSpawn].position, new Quaternion(0,0,0,0));
+            temp.name = ($"Zombie_{index++}").ToString();
             switch (randomSpawn)
             {
                 case 0: temp.SetWaypoint(randomBackLeftSpawnPoints[Random.Range(0, randomBackLeftSpawnPoints.Length)].gameObject); break;

@@ -15,7 +15,7 @@ namespace Controller.Components.VitalitySystem
         public int Damage => _damage;
         public EntityType Target => _target;
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerStay(Collider other)
         {
             if(_attackAnimator == null)
                 return;
