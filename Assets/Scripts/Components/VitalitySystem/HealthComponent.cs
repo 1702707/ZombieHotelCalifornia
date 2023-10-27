@@ -81,6 +81,8 @@ namespace Controller.Components.VitalitySystem
         public virtual void DoPunch()
         {
             //Punch audio
+            if(IsDead)
+                return;
             Staggered.Do();
             _comboEvent.TriggerEvent(new DamageData
             {
