@@ -47,7 +47,7 @@ namespace Controller.Components.VitalitySystem
 
         private void OnCollisionEnter(Collision collision)
         {
-            if(_health != null && (_health.Staggered || _health.IsDead))
+            if(_health != null && (_health.Staggered.InProgress || _health.IsDead))
                 return;
             //Debug.Log($" Enter {collision.gameObject.name}");
             HealthComponent health = collision.gameObject.GetComponent<HealthComponent>();
